@@ -1,5 +1,6 @@
 import {DataType} from "./types";
 import {FormInstance} from "@/form/instance";
+import {FormFieldValidator} from "@/form/validate";
 
 /**
  *  附加属性
@@ -70,4 +71,6 @@ export interface FormViewProps {
     onValuesChange?: (values: any) => void;
     /** 是否预览模式 */
     review?: boolean;
+    /** 字段校验逻辑 */
+    validators?:FormFieldValidator[];
 }

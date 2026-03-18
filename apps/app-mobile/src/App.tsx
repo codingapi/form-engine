@@ -1,4 +1,4 @@
-import {createAntdForm, FormAntdView} from "@coding-form/form-antd-mobile";
+import {useForm, FormAntdView} from "@coding-form/form-antd-mobile";
 import type {FormMeta} from "@coding-form/form-types";
 import {Button, Space} from "antd-mobile";
 
@@ -21,13 +21,24 @@ const App = () => {
         subForms: []
     }
 
-    const form = createAntdForm();
+    const form = useForm();
 
     return (
         <div>
             <FormAntdView
                 meta={meta}
                 form={form}
+                validators={[
+                    {
+                        code:'name',
+                        validator:(value,instance)=>{
+                            if(value){
+                                return true;
+                            }
+                            return '你可真行'
+                        }
+                    }
+                ]}
             />
 
             <Space>

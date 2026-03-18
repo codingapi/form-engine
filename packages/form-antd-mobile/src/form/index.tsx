@@ -1,6 +1,6 @@
 import React from "react";
 import {FormViewProps} from "@coding-form/form-types";
-import {FormInstance, FormInstanceContext} from "@coding-form/form-presenter";
+import {FormContext, FormInstance, FormValidate} from "@coding-form/form-presenter";
 import {Form} from "antd-mobile";
 import {FormItemProps} from "@/types/item";
 import {FormFactory} from "@/factory";
@@ -9,11 +9,12 @@ export const FormAntdView: React.FC<FormViewProps> = (props) => {
 
     const [form] = Form.useForm();
 
-    const instance = React.useMemo(() => {
-        if (props.form) {
-            return props.form as FormInstance;
-        } else {
-            return new FormInstance(form);
+    const context = React.useMemo(() => {
+        const instance = props.form ? props.form as FormInstance : new FormInstance(form);
+
+        return {
+            instance,
+            validate: new FormValidate(props.validators || [],instance),
         }
     }, [props.form]);
 
@@ -22,9 +23,9 @@ export const FormAntdView: React.FC<FormViewProps> = (props) => {
     const review = props.review || false;
 
     return (
-        <FormInstanceContext.Provider value={instance}>
+        <FormContext.Provider value={context}>
             <Form
-                form={instance.getProxyTarget()}
+                form={form}
             >
                 {fields.map(field => {
 
@@ -41,6 +42,6 @@ export const FormAntdView: React.FC<FormViewProps> = (props) => {
                     }
                 })}
             </Form>
-        </FormInstanceContext.Provider>
+        </FormContext.Provider>
     )
 }
