@@ -5,13 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build:form-types": "pnpm -F @coding-form/form-types build",
-    "build:form-presenter": "pnpm -F @coding-form/form-presenter build",
-    "build:form-antd": "pnpm -F @coding-form/form-antd build",
-    "build:form-antd-mobile": "pnpm -F @coding-form/form-antd-mobile build",
-    "build": "pnpm run build:form-types && pnpm run build:form-presenter && pnpm run build:form-antd && pnpm run build:form-antd-mobile",
-    "watch:form-presenter": "pnpm -F @coding-form/form-presenter dev",
-    "watch:form-antd": "pnpm -F @coding-form/form-antd dev",
-    "watch:form-antd-mobile": "pnpm -F @coding-form/form-antd-mobile dev",
+    "build:form-view": "pnpm -F @coding-form/form-view build",
+    "build": "pnpm run build:form-types && pnpm run build:form-view",
+    "watch:form-view": "pnpm -F @coding-form/form-view dev",
     "dev:app-pc": "pnpm -F @form-example/app-pc dev",
     "dev:app-mobile": "pnpm -F @form-example/app-mobile dev",
     "clean": "pnpm cleaninstall-node"
