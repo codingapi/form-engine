@@ -1,0 +1,32 @@
+{
+  "name": "@coding-form/form-antd",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "rslib build",
+    "dev": "rslib build --watch"
+  },
+  "dependencies": {
+    "@ant-design/icons": "~6.1.0",
+    "@coding-form/form-types": "workspace:*",
+    "antd": "^6.2.1",
+    "dayjs": "^1.11.19"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@coding-form/form-types": "workspace:*"
+  }
+}
