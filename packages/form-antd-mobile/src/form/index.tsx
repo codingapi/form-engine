@@ -1,7 +1,7 @@
 import React from "react";
 import {FormViewProps} from "@coding-form/form-types";
 import {FormInstance, FormInstanceContext} from "@coding-form/form-presenter";
-import {Form} from "antd";
+import {Form} from "antd-mobile";
 import {FormItemProps} from "@/types/item";
 import {FormFactory} from "@/factory";
 

@@ -1,5 +1,5 @@
 {
-  "name": "@coding-form/form-antd",
+  "name": "@coding-form/form-presenter",
   "version": "0.0.1",
   "type": "module",
   "exports": {
@@ -17,11 +17,7 @@
     "dev": "rslib build --watch"
   },
   "dependencies": {
-    "@ant-design/icons": "~6.1.0",
-    "@coding-form/form-presenter": "workspace:*",
-    "@coding-form/form-types": "workspace:*",
-    "antd": "^6.2.1",
-    "dayjs": "^1.11.19"
+    "@coding-form/form-types": "workspace:*"
   },
   "peerDependencies": {
     "react": ">=18",

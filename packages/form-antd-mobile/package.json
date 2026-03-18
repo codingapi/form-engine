@@ -1,5 +1,5 @@
 {
-  "name": "@coding-form/form-antd",
+  "name": "@coding-form/form-antd-mobile",
   "version": "0.0.1",
   "type": "module",
   "exports": {
@@ -20,7 +20,7 @@
     "@ant-design/icons": "~6.1.0",
     "@coding-form/form-presenter": "workspace:*",
     "@coding-form/form-types": "workspace:*",
-    "antd": "^6.2.1",
+    "antd-mobile": "^5.42.3",
     "dayjs": "^1.11.19"
   },
   "peerDependencies": {
