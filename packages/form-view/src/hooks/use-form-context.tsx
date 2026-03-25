@@ -7,6 +7,7 @@ import {FormPresenter} from "@/presenters";
 import {FormInstance} from "@/instance";
 import {FormValidate} from "@/validate";
 import {EventContext} from "@/event";
+import {LayoutContext} from "@/layout";
 
 export const useFormContext = () => {
     const value = React.useContext(FormContext);
@@ -42,8 +43,10 @@ export const createFormContext = (props: FormViewProps) => {
 
         const validate = new FormValidate(props.meta, instance, props.validators || []);
 
+        const layoutContext = new LayoutContext(props.layouts || []);
+
         const eventContext = new EventContext(props.events || []);
-        ref.current = new FormContextScope(props, instance, validate, eventContext, presenter);
+        ref.current = new FormContextScope(props, instance, validate, eventContext, layoutContext, presenter);
         ref.current.initialState();
     }
 

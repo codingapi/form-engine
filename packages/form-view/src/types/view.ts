@@ -1,7 +1,6 @@
 import {DataType} from "./types";
 import {FormInstance} from "@/instance";
-import {FormFieldValidator} from "@/types";
-import {FormEvent} from "@/types";
+import {FormEvent, FormFieldValidator} from "@/types";
 
 /**
  *  附加属性
@@ -63,27 +62,49 @@ export interface FormMeta {
 /**
  *  字段唯一标识
  */
-export interface FieldCode{
+export interface FieldCode {
     /** 表单code **/
-    formCode?:string;
+    formCode?: string;
     /** 字段code **/
-    fieldCode:string;
+    fieldCode: string;
+}
+
+/** 字段排版 **/
+export interface FieldLayout {
+    /** 字段名称 **/
+    code: string;
+    /** 大小排版 **/
+    span: number;
 }
 
 /**
- * 布局控制
+ * 卡片布局
  */
-export interface FormLayout{
+export interface CardLayout {
+    /** 布局标题 **/
+    title: string;
+    /** 布局方向 **/
+    layout: 'horizontal' | 'vertical';
+    /** 展示字段 **/
+    fields: FieldLayout[];
+    /** 主要字段 **/
+    mainFields: string[];
+}
 
+/**
+ *  表单布局
+ */
+export interface FormLayout {
+    formCode: string;
+    type: 'card',
+    props:CardLayout
 }
 
 
 /**
  *  字段唯一标识
  */
-export type FieldKey = string|FieldCode;
-
-
+export type FieldKey = string | FieldCode;
 
 /**
  * 表单视图属性
@@ -98,9 +119,9 @@ export interface FormViewProps {
     /** 是否预览模式 */
     review?: boolean;
     /** 字段校验逻辑 */
-    validators?:FormFieldValidator[];
+    validators?: FormFieldValidator[];
     /** 事件定义 **/
     events?: FormEvent[];
     /** 布局控制 **/
-    layout?:FormLayout
+    layouts?: FormLayout[]
 }

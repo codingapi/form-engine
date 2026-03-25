@@ -6,4 +6,5 @@ export * from "./register";
 export * from "./types";
 export * from "./hooks";
 export * from "./factory";
+export * from "./layout";
 export * from "./form";

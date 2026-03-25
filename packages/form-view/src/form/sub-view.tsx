@@ -1,5 +1,4 @@
 import React from "react";
-import {FormItemFactory} from "@/factory";
 import {useFormContext} from "@/hooks";
 
 interface FormSubViewProps {
@@ -35,6 +34,8 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
 
     const formTarget = formControl?.getProxyTarget();
 
+    const layoutContext = context.getLayoutContext();
+
     React.useEffect(() => {
         const events = context.getEventContext().getLoadEvents();
         if (events && events.length > 0) {
@@ -44,13 +45,13 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
         }
     }, []);
 
+
+
     return (
         <Form
             form={formTarget}
         >
-            {fields.map(field => {
-                return FormItemFactory.getInstance().render(formCode, field, review, context);
-            })}
+            {layoutContext.render(props.formCode, fields, review, context)}
         </Form>
     )
 }

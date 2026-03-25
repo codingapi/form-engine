@@ -2,7 +2,6 @@ import React from "react";
 import {FormItemProps} from "@/types/item";
 import {FormField} from "@/types";
 import {FormContextScope} from "@/context";
-import {value} from "happy-dom/lib/PropertySymbol";
 
 export class FormItemFactory {
 
@@ -28,7 +27,12 @@ export class FormItemFactory {
     }
 
 
-    public render(formCode:string,formField:FormField,readOnly:boolean,context:FormContextScope){
+    public render(formCode:string,
+                  formField:FormField,
+                  layout:'horizontal' | 'vertical',
+                  readOnly:boolean,
+                  context:FormContextScope){
+
         const formItemProps: FormItemProps = {
             ...formField,
             readOnly: readOnly,
@@ -65,6 +69,7 @@ export class FormItemFactory {
                     rules={rules}
                     onChange={handlerOnChange}
                     onBlur={handlerOnBlur}
+                    layout={layout}
                 />
             )
         }

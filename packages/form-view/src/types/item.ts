@@ -10,4 +10,5 @@ export interface FormItemProps{
     placeholder?:string;
     readOnly?:boolean;
     rules?:any[];
+    layout?:'horizontal' | 'vertical';
 }

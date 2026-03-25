@@ -59,6 +59,23 @@ const HomePage = () => {
                         }
                     }
                 ]}
+                layouts={[
+                    {
+                        formCode:'leave',
+                        type:'card',
+                        props:{
+                            title:'测试',
+                            layout:'vertical',
+                            mainFields:[],
+                            fields:[
+                                {
+                                    code:'name',
+                                    span:12
+                                }
+                            ]
+                        }
+                    }
+                ]}
             />
 
             <Space>

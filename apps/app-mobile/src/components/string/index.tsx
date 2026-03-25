@@ -12,6 +12,7 @@ export const FormString: React.FC<FormItemProps> = (props) => {
             required={props.required}
             hidden={props.hidden}
             rules={props.rules}
+            layout={props.layout}
         >
             <Input
                 placeholder={props.placeholder}
