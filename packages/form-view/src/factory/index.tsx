@@ -2,6 +2,7 @@ import React from "react";
 import {FormItemProps} from "@/types/item";
 import {FormField} from "@/types";
 import {FormContextScope} from "@/context";
+import {value} from "happy-dom/lib/PropertySymbol";
 
 export class FormItemFactory {
 
@@ -44,12 +45,15 @@ export class FormItemFactory {
             fieldCode:formField.code,
         }
 
-        const handlerOnChange = (value:string)=>{
+        const handlerOnChange = (value:any)=>{
             formItemProps.onChange?.(value);
             eventContext.handlerOnChange(fieldKey, value);
         }
 
-
+        const handlerOnBlur = (value:any) => {
+            formItemProps.onBlur?.(value);
+            eventContext.handlerOnBlur(fieldKey,value);
+        }
 
         if (FormItem) {
             const rules = context.getValidate().getValidatorRules(fieldKey);
@@ -58,6 +62,7 @@ export class FormItemFactory {
                     {...formItemProps}
                     rules={rules}
                     onChange={handlerOnChange}
+                    onBlur={handlerOnBlur}
                 />
             )
         }

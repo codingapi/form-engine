@@ -1,7 +1,6 @@
 import {createFormInstance, FormView} from "@coding-form/form-view";
 import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd";
-import type {OnChangeEvent} from "@coding-form/form-view";
 
 const HomePage = () => {
 
@@ -42,11 +41,12 @@ const HomePage = () => {
                 ]}
                 events={[
                     {
+                        type: 'change',
                         target:'name',
                         event:(value)=>{
                             console.log('value',value)
                         }
-                    } as OnChangeEvent
+                    }
                 ]}
             />
 

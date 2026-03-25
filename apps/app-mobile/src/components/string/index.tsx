@@ -18,6 +18,9 @@ export const FormString: React.FC<FormItemProps> = (props) => {
                 onChange={(event)=>{
                     props.onChange?.(event);
                 }}
+                onBlur={(event)=>{
+                    props.onBlur?.(event.target.value);
+                }}
             />
         </Form.Item>
     )

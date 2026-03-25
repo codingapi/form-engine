@@ -6,6 +6,7 @@ export interface FormItemProps{
     defaultValue?: string;
     value?: string;
     onChange?: (value: string) => void;
+    onBlur?: (value: string) => void;
     placeholder?:string;
     readOnly?:boolean;
     rules?:any[];

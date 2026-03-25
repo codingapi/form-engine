@@ -22,6 +22,17 @@ export const FormSubView:React.FC<FormSubViewProps> = (props)=>{
 
     const formTarget  = formControl?.getProxyTarget();
 
+
+    React.useEffect(()=>{
+        const events =  context.getEventContext().getLoadEvents();
+        if (events && events.length > 0) {
+            for (const event of events) {
+                event.event();
+            }
+        }
+    },[]);
+
+
     return (
         <Form
             form={formTarget}

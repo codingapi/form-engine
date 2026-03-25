@@ -1,26 +1,66 @@
 import {FieldKey, FormEvent} from "@/types";
 
-export class EventContext{
+export class EventContext {
 
-    private readonly events:FormEvent[];
+    private readonly events: FormEvent[];
 
-    constructor(events:FormEvent[]){
+    constructor(events: FormEvent[]) {
         this.events = events;
     }
 
-
-    public handlerOnChange(target:FieldKey,value:string){
-        const event = this.getEvent(target);
-        if(event){
-
+    public handlerOnChange(target: FieldKey, value: any) {
+        const events = this.getEvents('change', target);
+        if (events && events.length > 0) {
+            for (const event of events) {
+                event.event(value);
+            }
         }
     }
 
-    private getEvent(target:FieldKey){
-        for(let event of this.events){
-            console.log(typeof event)
+
+    public handlerOnBlur(target: FieldKey,value:any) {
+        const events = this.getEvents('blur', target);
+        if (events && events.length > 0) {
+            for (const event of events) {
+                event.event(value);
+            }
         }
-        return null;
+    }
+
+    public getLoadEvents(): FormEvent[] {
+        return this.getEvents('load');
+    }
+
+
+    private getEvents(type: string, target?: FieldKey) {
+        const events = [];
+        for (const event of this.events) {
+            if (event.type == type) {
+                const eventTarget = event.target;
+
+                if (target === eventTarget) {
+                    events.push(event)
+                }
+                if (typeof target !== 'string' && typeof eventTarget === 'string') {
+                    if (target?.fieldCode === eventTarget) {
+                        events.push(event)
+                    }
+                }
+
+                if (typeof target === 'string' && typeof eventTarget !== 'string') {
+                    if (!eventTarget?.formCode && eventTarget?.fieldCode === target) {
+                        events.push(event)
+                    }
+                }
+
+                if (typeof target !== 'string' && typeof eventTarget !== 'string') {
+                    if (eventTarget?.fieldCode === target?.fieldCode && eventTarget?.formCode === target?.formCode) {
+                        events.push(event)
+                    }
+                }
+            }
+        }
+        return events;
     }
 
 }
