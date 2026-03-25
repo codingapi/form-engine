@@ -1,1 +1,205 @@
 # Form Engine
+
+一个基于 React 的动态表单引擎，支持表单动态渲染、字段验证、事件处理和布局控制。
+
+## 项目结构
+
+```
+coding-form/
+├── packages/
+│   └── form-view/          # 核心表单视图库
+│       ├── src/
+│       │   ├── form/       # 表单组件
+│       │   ├── factory/    # 表单项工厂
+│       │   ├── register/   # 组件注册中心
+│       │   ├── store/      # Redux 状态管理
+│       │   ├── context/    # React Context
+│       │   ├── instance/   # 表单实例控制
+│       │   ├── presenters/ # 表单展示层
+│       │   ├── validate/   # 表单验证
+│       │   ├── event/      # 事件处理
+│       │   ├── layout/     # 布局系统
+│       │   ├── hooks/      # 自定义 Hooks
+│       │   └── types/      # TypeScript 类型定义
+│       └── dist/           # 构建输出
+├── apps/                   # 示例应用
+│   ├── app-pc/            # PC 端示例
+│   └── app-mobile/        # 移动端示例
+└── package.json           # 工作区配置
+```
+
+## 核心功能
+
+### 1. 动态表单渲染
+
+通过元数据（Meta）动态生成表单，支持：
+- 多种数据类型：`STRING`, `INTEGER`, `LONG`, `DOUBLE`, `BOOLEAN`
+- 字段属性：名称、编码、类型、默认值、提示等
+- 嵌套子表单（subForms）
+
+### 2. 表单验证
+
+```typescript
+interface FormFieldValidator {
+    target: FieldKey;           // 校验目标字段
+    validator: (instance: FormInstance, value: any) => boolean | string;
+}
+```
+
+- 支持自定义验证规则
+- 异步验证支持
+- 隐藏字段自动跳过验证
+
+### 3. 事件系统
+
+支持表单事件绑定和处理：
+
+```typescript
+interface FormEvent {
+    type: 'load' | 'change' | 'blur';  // 事件类型
+    target: FieldKey;                   // 事件目标
+    event: (formInstance: FormInstance, value: any) => void;
+}
+```
+
+- `load`: 表单加载时触发
+- `change`: 字段值变化时触发
+- `blur`: 字段失去焦点时触发
+
+### 4. 布局控制
+
+支持卡片布局和默认布局：
+
+```typescript
+interface FormLayout {
+    formCode: string;
+    type: 'card';
+    props: CardLayout
+}
+
+interface CardLayout {
+    title: string;
+    layout: 'horizontal' | 'vertical';
+    fields: FieldLayout[];
+    mainFields: string[];
+}
+```
+
+### 5. 表单实例控制
+
+提供丰富的表单操作方法：
+
+```typescript
+// 获取/设置字段值
+getFieldValue(name: string, formCode?: string)
+getFieldsValue(formCode?: string)
+setFieldValue(name: string, value: any, formCode?: string)
+setFieldsValue(values: any, formCode?: string)
+
+// 表单操作
+resetFields(nameList?: string[], formCode?: string)
+validateFields(nameList?: string[], formCode?: string)
+submit(formCode?: string)
+
+// 动态控制
+hiddenFields(hidden: boolean, nameList: string[]|string, formCode?: string)
+requiredFields(required: boolean, nameList: string[]|string, formCode?: string)
+```
+
+## 快速开始
+
+### 1. 安装依赖
+
+```bash
+pnpm install
+```
+
+### 2. 注册表单组件
+
+```tsx
+import { FormRegistry } from '@coding-form/form-view';
+import YourFormComponent from './YourFormComponent';
+import formInstanceFactory from './formInstanceFactory';
+
+FormRegistry.getInstance().register(YourFormComponent, formInstanceFactory);
+```
+
+### 3. 使用表单视图
+
+```tsx
+import { FormView } from '@coding-form/form-view';
+
+const meta = {
+    name: '用户信息',
+    code: 'user_form',
+    fields: [
+        {
+            id: '1',
+            name: '姓名',
+            code: 'name',
+            type: 'text_input',
+            dataType: 'STRING',
+            hidden: false,
+            required: true,
+            placeholder: '请输入姓名'
+        }
+    ]
+};
+
+<FormView meta={meta} />;
+```
+
+### 4. 开发模式
+
+```bash
+# 监听构建 form-view
+pnpm watch:form-view
+
+# 运行 PC 示例应用
+pnpm dev:app-pc
+
+# 运行移动端示例应用
+pnpm dev:app-mobile
+```
+
+### 5. 构建
+
+```bash
+pnpm build
+```
+
+## 技术栈
+
+- **React 18** - UI 框架
+- **TypeScript** - 类型系统
+- **Redux Toolkit** - 状态管理
+- **React Redux** - React 绑定
+- **Rslib** - 构建工具
+
+## API 参考
+
+### FormView 组件属性
+
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| meta | FormMeta | 表单元数据定义 |
+| form | FormInstance | 表单实例 |
+| onValuesChange | (values: any) => void | 值变化回调 |
+| review | boolean | 是否预览模式 |
+| validators | FormFieldValidator[] | 验证规则数组 |
+| events | FormEvent[] | 事件定义数组 |
+| layouts | FormLayout[] | 布局定义数组 |
+
+### 数据类型
+
+| 类型 | 说明 |
+|------|------|
+| STRING | 字符串 |
+| INTEGER | 整数 |
+| LONG | 长整数 |
+| DOUBLE | 小数 |
+| BOOLEAN | 布尔值 |
+
+## 许可证
+
+ISC
