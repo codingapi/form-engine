@@ -202,4 +202,4 @@ pnpm build
 
 ## 许可证
 
-ISC
+[LICENSE](./LICENSE)
