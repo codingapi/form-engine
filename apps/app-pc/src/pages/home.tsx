@@ -1,6 +1,7 @@
 import {createFormInstance, FormView} from "@coding-form/form-view";
 import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd";
+import {FormInstance} from "@coding-form/form-view";
 
 const HomePage = () => {
 
@@ -9,7 +10,16 @@ const HomePage = () => {
         code: "leave",
         fields: [
             {
-                id: "1",
+                id: "id",
+                name: 'id',
+                code: 'id',
+                type: "string",
+                dataType: 'STRING',
+                hidden: true,
+                required: false,
+            },
+            {
+                id: "name",
                 name: '姓名',
                 code: 'name',
                 type: "string",
@@ -31,7 +41,7 @@ const HomePage = () => {
                 validators={[
                     {
                         target:'name',
-                        validator:(value,instance)=>{
+                        validator:(instance:FormInstance,value:any)=>{
                             if(value){
                                 return true;
                             }
@@ -43,8 +53,9 @@ const HomePage = () => {
                     {
                         type: 'change',
                         target:'name',
-                        event:(value)=>{
-                            console.log('value',value)
+                        event:(instance:FormInstance,value:any)=>{
+                            console.log('value',value);
+                            instance.setFieldValue('id',value);
                         }
                     }
                 ]}

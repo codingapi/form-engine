@@ -1,6 +1,7 @@
 import {createFormInstance, FormView} from "@coding-form/form-view";
 import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd-mobile";
+import {FormInstance} from "@coding-form/form-view";
 
 const HomePage = () => {
 
@@ -32,7 +33,7 @@ const HomePage = () => {
                 validators={[
                     {
                         target:'name',
-                        validator:(value,instance)=>{
+                        validator:(instance:FormInstance,value:any)=>{
                             if(value){
                                 return true;
                             }

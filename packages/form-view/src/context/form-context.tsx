@@ -39,6 +39,10 @@ export class FormContextScope {
         return this.instance.getFormControl(formCode);
     }
 
+    public getFormInstance(){
+        return this.instance;
+    }
+
     public getPresenter() {
         return this.presenter;
     }

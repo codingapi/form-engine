@@ -31,13 +31,15 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
 
     const formControl = context.getFormControl(formCode);
 
+    const formInstance = context.getFormInstance();
+
     const formTarget = formControl?.getProxyTarget();
 
     React.useEffect(() => {
         const events = context.getEventContext().getLoadEvents();
         if (events && events.length > 0) {
             for (const event of events) {
-                event.event();
+                event.event(formInstance);
             }
         }
     }, []);

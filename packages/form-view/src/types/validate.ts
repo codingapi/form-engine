@@ -10,6 +10,6 @@ export interface FormFieldValidator {
     target: FieldKey;
 
     /** 校验函数 **/
-    validator: (value: any, instance: FormInstance) => string | true;
+    validator: (instance: FormInstance,value: any) => string | true;
 
 }

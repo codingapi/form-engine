@@ -84,7 +84,7 @@ export class FormInstance {
         this.getFormControl(formCode)?.setFieldsValue(values);
     }
 
-    public setFieldValue(name: string, value: any, formCode: string) {
+    public setFieldValue(name: string, value: any, formCode?: string) {
         this.getFormControl(formCode)?.setFieldValue(name, value);
     }
 

@@ -40,6 +40,8 @@ export class FormItemFactory {
 
         const eventContext = context.getEventContext();
 
+        const instance = context.getFormInstance();
+
         const fieldKey = {
             formCode,
             fieldCode:formField.code,
@@ -47,12 +49,12 @@ export class FormItemFactory {
 
         const handlerOnChange = (value:any)=>{
             formItemProps.onChange?.(value);
-            eventContext.handlerOnChange(fieldKey, value);
+            eventContext.handlerOnChange(instance,fieldKey, value);
         }
 
         const handlerOnBlur = (value:any) => {
             formItemProps.onBlur?.(value);
-            eventContext.handlerOnBlur(fieldKey,value);
+            eventContext.handlerOnBlur(instance,fieldKey,value);
         }
 
         if (FormItem) {

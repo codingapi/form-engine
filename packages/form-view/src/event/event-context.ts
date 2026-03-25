@@ -1,4 +1,5 @@
 import {FieldKey, FormEvent} from "@/types";
+import {FormInstance} from "@/instance";
 
 export class EventContext {
 
@@ -8,21 +9,21 @@ export class EventContext {
         this.events = events;
     }
 
-    public handlerOnChange(target: FieldKey, value: any) {
+    public handlerOnChange(formInstance:FormInstance,target: FieldKey, value: any) {
         const events = this.getEvents('change', target);
         if (events && events.length > 0) {
             for (const event of events) {
-                event.event(value);
+                event.event(formInstance,value);
             }
         }
     }
 
 
-    public handlerOnBlur(target: FieldKey,value:any) {
+    public handlerOnBlur(formInstance:FormInstance,target: FieldKey,value:any) {
         const events = this.getEvents('blur', target);
         if (events && events.length > 0) {
             for (const event of events) {
-                event.event(value);
+                event.event(formInstance,value);
             }
         }
     }

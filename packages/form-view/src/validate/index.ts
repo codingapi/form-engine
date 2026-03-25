@@ -86,7 +86,7 @@ export class FormValidate {
             if (this.supportValidator(fieldKey, validator)) {
                 rules.push({
                     validator: async (rule: any, value: any, callback: any) => {
-                        const res = validator.validator(value, this.instance);
+                        const res = validator.validator(this.instance,value);
                         if (res !== true) {
                             return Promise.reject(new Error(res));
                         }

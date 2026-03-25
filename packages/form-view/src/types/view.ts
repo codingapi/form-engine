@@ -70,11 +70,19 @@ export interface FieldCode{
     fieldCode:string;
 }
 
+/**
+ * 布局控制
+ */
+export interface FormLayout{
+
+}
+
 
 /**
  *  字段唯一标识
  */
 export type FieldKey = string|FieldCode;
+
 
 
 /**
@@ -93,4 +101,6 @@ export interface FormViewProps {
     validators?:FormFieldValidator[];
     /** 事件定义 **/
     events?: FormEvent[];
+    /** 布局控制 **/
+    layout?:FormLayout
 }
