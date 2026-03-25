@@ -17,15 +17,11 @@
     "dev": "rslib build --watch"
   },
   "dependencies": {
-    "@coding-form/form-types": "workspace:*",
     "@reduxjs/toolkit": "^2.11.2",
     "react-redux": "^9.2.0"
   },
   "peerDependencies": {
     "react": ">=18",
     "react-dom": ">=18"
-  },
-  "devDependencies": {
-    "@coding-form/form-types": "workspace:*"
   }
 }
