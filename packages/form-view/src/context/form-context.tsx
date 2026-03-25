@@ -1,30 +1,34 @@
 import React from "react";
 import {FormValidate} from "@/validate";
 import {FormPresenter} from "@/presenters";
-import {FormState} from "@/types";
+import {FormState, FormViewProps} from "@/types";
 import {EventContext} from "@/event";
 import {FormInstance} from "@/instance";
 
 
 export class FormContextScope {
 
+    private readonly props:FormViewProps;
     private readonly instance: FormInstance;
     private readonly validate: FormValidate;
     private readonly presenter: FormPresenter;
     private readonly eventContext: EventContext;
 
-    constructor(instance: FormInstance,
+    constructor(props:FormViewProps,
+                instance: FormInstance,
                 validate: FormValidate,
                 eventContext: EventContext,
                 presenter: FormPresenter) {
+        this.props = props;
         this.instance = instance;
         this.presenter = presenter;
         this.eventContext = eventContext;
         this.validate = validate;
+        this.instance.setPresenter(presenter);
     }
 
     public initialState() {
-        this.presenter.initialState();
+        this.presenter.initialState(this.props.meta);
     }
 
     public syncState(state: FormState) {
@@ -34,7 +38,6 @@ export class FormContextScope {
     public getFormControl(formCode:string) {
         return this.instance.getFormControl(formCode);
     }
-
 
     public getPresenter() {
         return this.presenter;

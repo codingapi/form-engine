@@ -8,7 +8,7 @@ import {FormInstance} from "@/instance";
 import {FormValidate} from "@/validate";
 import {EventContext} from "@/event";
 
-export const useFormContext = ()=> {
+export const useFormContext = () => {
     const value = React.useContext(FormContext);
     const state = useSelector((state: FormReduxState) => state.form);
     if (!value) {
@@ -21,7 +21,7 @@ export const useFormContext = ()=> {
 }
 
 
-export const createFormContext = (props:FormViewProps)=> {
+export const createFormContext = (props: FormViewProps) => {
 
     const ref = React.useRef<FormContextScope | undefined>(undefined);
 
@@ -31,7 +31,6 @@ export const createFormContext = (props:FormViewProps)=> {
 
     if (!ref.current) {
         const presenter = new FormPresenter(
-            props,
             state,
             (prevState) => {
                 dispatch(updateState(prevState));
@@ -41,19 +40,19 @@ export const createFormContext = (props:FormViewProps)=> {
 
         const instance = props.form ? props.form as FormInstance : new FormInstance(props.meta);
 
-        const validate = new FormValidate(props.meta, instance,props.validators || []);
+        const validate = new FormValidate(props.meta, instance, props.validators || []);
 
         const eventContext = new EventContext(props.events || []);
-        ref.current = new FormContextScope(instance, validate,eventContext,presenter);
+        ref.current = new FormContextScope(props, instance, validate, eventContext, presenter);
         ref.current.initialState();
     }
 
 
-    React.useEffect(()=>{
+    React.useEffect(() => {
         if (ref.current) {
             ref.current.syncState(state);
         }
-    },[state]);
+    }, [state]);
 
 
     return ref.current;

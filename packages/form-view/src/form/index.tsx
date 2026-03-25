@@ -32,16 +32,14 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
         <FormContext.Provider value={context}>
             <FormSubView
                 Form={Form}
-                meta={meta}
-                context={context}
+                formCode={meta.code}
                 review={review}
             />
             {subFormList && subFormList.map(item=>{
                 return (
                     <FormSubView
                         Form={Form}
-                        meta={item}
-                        context={context}
+                        formCode={item.code}
                         review={review}
                     />
                 )

@@ -65,6 +65,13 @@ const HomePage = () => {
                 >getValues</Button>
 
                 <Button
+                    onClick={async () => {
+                        const values = await form.validateFields();
+                        console.log(values);
+                    }}
+                >validate</Button>
+
+                <Button
                     onClick={() => {
                         form.setFieldsValue({
                             name: "123"
