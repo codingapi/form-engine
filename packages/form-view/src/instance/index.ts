@@ -1,55 +1,100 @@
-import {FormInstance as FormInstanceInterface, NamePath} from "@coding-form/form-types";
+import {FormMeta} from "@/types";
+import {FormRegistry} from "@/register";
+import {FormControl} from "./control";
 
-export class FormInstance implements FormInstanceInterface {
 
-    // 代理的form控制对象
-    private readonly proxyTarget:any;
+export class FormInstance {
 
-    constructor(target: any) {
-        this.proxyTarget = target;
+    private readonly instanceList:FormControl[];
+
+    private readonly meta:FormMeta;
+
+    constructor(meta:FormMeta) {
+        this.meta = meta;
+        this.instanceList = [];
+
+        this.initInstanceList();
     }
 
-    public getProxyTarget(): any {
-        return this.proxyTarget;
+    private createInstance(formCode:string) {
+        const form = FormRegistry.getInstance().getFormInstance()?.();
+        if (!form) {
+            throw new Error('Form Instance must register.');
+        }
+
+        return new FormControl(formCode,form);
     }
 
-    public getFieldValue(name: NamePath) {
-        return this.proxyTarget.getFieldValue(name);
+
+    private initInstanceList():void {
+
+        const formList = [];
+        formList.push(this.meta);
+
+        const subFormList = this.meta.subForms || [];
+
+        for(const subForm of subFormList) {
+            formList.push(subForm);
+        }
+
+        for (const subForm of formList) {
+            this.instanceList.push(this.createInstance(subForm.code));
+        }
     }
 
-    public getFieldsValue() {
-        return this.proxyTarget.getFieldsValue();
+    public getFormControl(formCode?:string){
+        if(formCode){
+            for(const item of this.instanceList){
+                if(item.getFormCode() === formCode){
+                    return item;
+                }
+            }
+        }else {
+            if(this.instanceList.length>0){
+                return this.instanceList[0];
+            }
+        }
+        return null;
     }
 
-    public resetFields(nameList?: NamePath[]) {
-        this.proxyTarget.resetFields(nameList);
+    public getProxyTarget(formCode?:string): any {
+        return this.getFormControl(formCode)?.getProxyTarget();
     }
 
-    public setFieldsValue(values: any) {
-        this.proxyTarget.setFieldsValue(values);
+    public getFieldValue(name: string,formCode?:string) {
+        this.getFormControl(formCode)?.getFieldValue(name);
     }
 
-    public setFieldValue(name: NamePath, value: any) {
-        this.proxyTarget.setFieldValue(name,value);
+    public getFieldsValue(formCode?:string) {
+        return this.getFormControl(formCode)?.getFieldsValue();
     }
 
-    public submit() {
-        this.proxyTarget.submit();
+    public resetFields(nameList?: string[],formCode?:string) {
+        this.getFormControl(formCode)?.resetFields(nameList);
     }
 
-    public validateFields(nameList?: NamePath[]) {
-        return new Promise<any>((resolve) => {
-
-        });
+    public setFieldsValue(values: any,formCode?:string) {
+        this.getFormControl(formCode)?.setFieldsValue(values);
     }
 
-    public hiddenFields(hidden:boolean,nameList?: NamePath[]) {
-        console.log('hiddenFields, nameList', nameList);
+    public setFieldValue(name: string, value: any,formCode:string) {
+        this.getFormControl(formCode)?.setFieldValue(name,value);
     }
 
-    public requiredFields(required:boolean,nameList?: NamePath[]) {
-        console.log('requiredFields, nameList', nameList);
+    public submit(formCode?:string) {
+        this.getFormControl(formCode)?.submit();
     }
 
+    public validateFields(nameList?: string[],formCode?:string) {
+       this.getFormControl(formCode)?.validateFields(nameList);
+    }
+
+    public hiddenFields(hidden:boolean,nameList?: string[],formCode?:string) {
+        this.getFormControl(formCode)?.hiddenFields(hidden);
+    }
+
+    public requiredFields(required:boolean,nameList?: string[],formCode?:string) {
+        this.getFormControl(formCode)?.requiredFields(required);
+    }
 
 }

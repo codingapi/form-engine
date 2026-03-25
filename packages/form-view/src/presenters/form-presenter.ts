@@ -1,4 +1,4 @@
-import {Dispatch, FormViewProps} from "@coding-form/form-types";
+import {Dispatch, FormViewProps} from "@/types";
 import {FormState} from "@/types";
 
 export class FormPresenter {

@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:form-types": "pnpm -F @coding-form/form-types build",
     "build:form-view": "pnpm -F @coding-form/form-view build",
-    "build": "pnpm run build:form-types && pnpm run build:form-view",
+    "build": "pnpm run build:form-view",
     "watch:form-view": "pnpm -F @coding-form/form-view dev",
     "dev:app-pc": "pnpm -F @form-example/app-pc dev",
     "dev:app-mobile": "pnpm -F @form-example/app-mobile dev",

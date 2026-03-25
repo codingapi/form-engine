@@ -1,16 +1,13 @@
-import {FormInstance} from "@/form/instance";
-
+import {FormInstance} from "@/instance";
+import {FieldKey} from "@/types";
 
 /**
  * 字段校验器
  */
 export interface FormFieldValidator {
 
-    /** 表单名称 **/
-    formCode?: string;
-
     /** 字段名 **/
-    fieldCode: string;
+    target: FieldKey;
 
     /** 校验函数 **/
     validator: (value: any, instance: FormInstance) => string | true;

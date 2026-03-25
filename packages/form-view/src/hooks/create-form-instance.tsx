@@ -1,13 +1,7 @@
-import React from "react";
 import {FormInstance} from "@/instance";
-import {FormRegistry} from "@/register";
+import {FormMeta} from "@/types";
 
-export const createFormInstance = () => {
-    return React.useMemo(() => {
-        const form = FormRegistry.getInstance().getFormInstance()?.();
-        if (!form) {
-            throw new Error('Form Instance must register.');
-        }
-        return new FormInstance(form);
-    }, []);
+export const createFormInstance = (meta:FormMeta) => {
+
+    return new FormInstance(meta);
 }

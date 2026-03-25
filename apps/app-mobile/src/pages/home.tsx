@@ -1,5 +1,5 @@
 import {createFormInstance, FormView} from "@coding-form/form-view";
-import type {FormMeta} from "@coding-form/form-types";
+import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd-mobile";
 
 const HomePage = () => {
@@ -22,7 +22,7 @@ const HomePage = () => {
         subForms: []
     }
 
-    const form = createFormInstance();
+    const form = createFormInstance(meta);
 
     return (
         <div>
@@ -31,7 +31,7 @@ const HomePage = () => {
                 form={form}
                 validators={[
                     {
-                        fieldCode:'name',
+                        target:'name',
                         validator:(value,instance)=>{
                             if(value){
                                 return true;

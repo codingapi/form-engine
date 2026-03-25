@@ -1,6 +1,7 @@
 import {DataType} from "./types";
-import {FormInstance} from "@/form/instance";
-import {FormFieldValidator} from "@/form/validate";
+import {FormInstance} from "@/instance";
+import {FormFieldValidator} from "@/types";
+import {FormEvent} from "@/types";
 
 /**
  *  附加属性
@@ -59,6 +60,22 @@ export interface FormMeta {
     subForms?: FormMeta[];
 }
 
+/**
+ *  字段唯一标识
+ */
+export interface FieldCode{
+    /** 表单code **/
+    formCode?:string;
+    /** 字段code **/
+    fieldCode:string;
+}
+
+
+/**
+ *  字段唯一标识
+ */
+export type FieldKey = string|FieldCode;
+
 
 /**
  * 表单视图属性
@@ -74,4 +91,6 @@ export interface FormViewProps {
     review?: boolean;
     /** 字段校验逻辑 */
     validators?:FormFieldValidator[];
+    /** 事件定义 **/
+    events?: FormEvent[];
 }

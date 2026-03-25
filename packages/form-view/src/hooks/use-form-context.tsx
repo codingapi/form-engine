@@ -1,19 +1,23 @@
 import React from "react";
 import {FormContext, FormContextScope} from "@/context";
-import { FormViewProps } from "@coding-form/form-types";
-import { useDispatch, useSelector } from "react-redux";
+import {FormViewProps} from "@/types";
+import {useDispatch, useSelector} from "react-redux";
 import {FormReduxState, updateState} from "@/store";
 import {FormPresenter} from "@/presenters";
-import {FormRegistry} from "@/register";
 import {FormInstance} from "@/instance";
 import {FormValidate} from "@/validate";
+import {EventContext} from "@/event";
 
 export const useFormContext = ()=> {
     const value = React.useContext(FormContext);
+    const state = useSelector((state: FormReduxState) => state.form);
     if (!value) {
         throw new Error('useFormContext must be used within the FormContext');
     }
-    return value;
+    return {
+        state,
+        context: value,
+    };
 }
 
 
@@ -34,15 +38,13 @@ export const createFormContext = (props:FormViewProps)=> {
                 return prevState;
             },
         );
-        const form = FormRegistry.getInstance().getFormInstance()?.();
-        if (!form) {
-            throw new Error('Form Instance must register.');
-        }
 
-        const instance = props.form ? props.form as FormInstance : new FormInstance(form);
+        const instance = props.form ? props.form as FormInstance : new FormInstance(props.meta);
 
         const validate = new FormValidate(props.meta, instance,props.validators || []);
-        ref.current = new FormContextScope(instance, validate,presenter);
+
+        const eventContext = new EventContext(props.events || []);
+        ref.current = new FormContextScope(instance, validate,eventContext,presenter);
         ref.current.initialState();
     }
 

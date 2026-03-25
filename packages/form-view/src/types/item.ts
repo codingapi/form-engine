@@ -1,14 +1,12 @@
-import {FormField} from "@coding-form/form-types";
-
-export interface FormItemInputProps {
+export interface FormItemProps{
+    name:string;
+    label?:string;
+    hidden?:boolean;
+    required?:boolean;
     defaultValue?: string;
     value?: string;
     onChange?: (value: string) => void;
     placeholder?:string;
     readOnly?:boolean;
-}
-
-
-export interface FormItemProps extends FormField{
-    readOnly?:boolean;
+    rules?:any[];
 }

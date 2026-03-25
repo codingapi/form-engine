@@ -1,5 +1,7 @@
 import React from "react";
 import {FormItemProps} from "@/types/item";
+import {FormField} from "@/types";
+import {FormContextScope} from "@/context";
 
 export class FormItemFactory {
 
@@ -22,6 +24,43 @@ export class FormItemFactory {
 
     public getItem(type: string) {
         return this.cache.get(type);
+    }
+
+
+    public render(formCode:string,formField:FormField,readOnly:boolean,context:FormContextScope){
+        const formItemProps: FormItemProps = {
+            ...formField,
+            readOnly: readOnly,
+            name:formField.code,
+            label:formField.name
+        };
+
+        const FormItem = FormItemFactory.getInstance().getItem(formField.type);
+
+        const eventContext = context.getEventContext();
+
+        const fieldKey = {
+            formCode,
+            fieldCode:formField.code,
+        }
+
+        const handlerOnChange = (value:string)=>{
+            formItemProps.onChange?.(value);
+            eventContext.handlerOnChange(fieldKey, value);
+        }
+
+
+
+        if (FormItem) {
+            const rules = context.getValidate().getValidatorRules(fieldKey);
+            return (
+                <FormItem
+                    {...formItemProps}
+                    rules={rules}
+                    onChange={handlerOnChange}
+                />
+            )
+        }
     }
 
 }

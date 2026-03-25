@@ -1,23 +1,24 @@
 import {Form, Input} from "antd-mobile";
 import React from "react";
-import {useFormContext,type FormItemProps} from "@coding-form/form-view";
+import {type FormItemProps} from "@coding-form/form-view";
 
 export const FormString: React.FC<FormItemProps> = (props) => {
 
-    const context = useFormContext();
-
-    const rules = context.validate.getValidatorRules(props.code);
-
     return (
         <Form.Item
-            name={props.code}
-            key={props.code}
-            label={props.name}
+            name={props.name}
+            key={props.name}
+            label={props.label}
             required={props.required}
             hidden={props.hidden}
-            rules={rules}
+            rules={props.rules}
         >
-            <Input placeholder={props.placeholder}/>
+            <Input
+                placeholder={props.placeholder}
+                onChange={(event)=>{
+                    props.onChange?.(event);
+                }}
+            />
         </Form.Item>
     )
 

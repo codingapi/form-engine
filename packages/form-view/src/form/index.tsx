@@ -1,17 +1,17 @@
 import React from "react";
-import {FormViewProps} from "@coding-form/form-types";
-import {FormItemProps} from "@/types/item";
-import {FormItemFactory} from "@/factory";
+import {FormViewProps} from "@/types";
 import {FormRegistry} from "@/register";
 import {FormContext} from "@/context";
 import {createFormContext} from "@/hooks";
 import {Provider} from "react-redux";
 import {formStore} from "@/store";
+import {FormSubView} from "@/form/sub-view";
 
 
 interface FormViewContentProps extends FormViewProps {
     Form: React.ComponentType<any>;
 }
+
 
 export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
 
@@ -22,34 +22,30 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
         throw new Error('Form Component must register. ');
     }
 
-    const instance = context.getInstance();
+    const meta = props.meta;
 
-    const formInstance = instance.getProxyTarget();
-
-    const fields = props.meta.fields || [];
+    const subFormList = meta.subForms || [];
 
     const review = props.review || false;
 
     return (
         <FormContext.Provider value={context}>
-            <Form
-                form={formInstance}
-            >
-                {fields.map(field => {
-
-                    const formItemProps: FormItemProps = {
-                        ...field,
-                        readOnly: review
-                    };
-
-                    const FormItem = FormItemFactory.getInstance().getItem(field.type);
-                    if (FormItem) {
-                        return (
-                            <FormItem {...formItemProps}/>
-                        )
-                    }
-                })}
-            </Form>
+            <FormSubView
+                Form={Form}
+                meta={meta}
+                context={context}
+                review={review}
+            />
+            {subFormList && subFormList.map(item=>{
+                return (
+                    <FormSubView
+                        Form={Form}
+                        meta={item}
+                        context={context}
+                        review={review}
+                    />
+                )
+            })}
         </FormContext.Provider>
     )
 }

@@ -1,6 +1,7 @@
 import {createFormInstance, FormView} from "@coding-form/form-view";
-import type {FormMeta} from "@coding-form/form-types";
+import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd";
+import type {OnChangeEvent} from "@coding-form/form-view";
 
 const HomePage = () => {
 
@@ -21,7 +22,7 @@ const HomePage = () => {
         subForms: []
     }
 
-    const form = createFormInstance();
+    const form = createFormInstance(meta);
 
     return (
         <div>
@@ -30,7 +31,7 @@ const HomePage = () => {
                 form={form}
                 validators={[
                     {
-                        fieldCode:'name',
+                        target:'name',
                         validator:(value,instance)=>{
                             if(value){
                                 return true;
@@ -38,6 +39,14 @@ const HomePage = () => {
                             return '你可真行'
                         }
                     }
+                ]}
+                events={[
+                    {
+                        target:'name',
+                        event:(value)=>{
+                            console.log('value',value)
+                        }
+                    } as OnChangeEvent
                 ]}
             />
 
