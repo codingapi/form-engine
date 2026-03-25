@@ -1,15 +1,42 @@
 import React from "react";
 import {FormInstance} from "@/instance";
 import {FormValidate} from "@/validate";
+import {FormPresenter} from "@/presenters";
+import {FormState} from "@/types";
 
 
-export interface FormContextScope{
+export class FormContextScope {
 
-    instance:FormInstance;
+    private readonly instance: FormInstance;
+    private readonly validate: FormValidate;
+    private readonly presenter: FormPresenter;
 
-    validate:FormValidate;
+    constructor(instance: FormInstance,validate: FormValidate, presenter: FormPresenter) {
+        this.instance = instance;
+        this.presenter = presenter;
+        this.validate = validate;
+    }
 
+    public initialState(){
+        this.presenter.initialState();
+    }
+
+    public syncState(state: FormState){
+        this.presenter.syncState(state);
+    }
+
+    public getInstance(){
+        return this.instance;
+    }
+
+    public getPresenter(){
+        return this.presenter;
+    }
+
+    public getValidate(){
+        return this.validate;
+    }
 }
 
 
-export const FormContext = React.createContext<FormContextScope|undefined>(undefined);
+export const FormContext = React.createContext<FormContextScope | undefined>(undefined);

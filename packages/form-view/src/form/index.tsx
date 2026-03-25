@@ -1,35 +1,30 @@
 import React from "react";
 import {FormViewProps} from "@coding-form/form-types";
 import {FormItemProps} from "@/types/item";
-import {FormFactory} from "@/factory";
+import {FormItemFactory} from "@/factory";
 import {FormRegistry} from "@/register";
-import {FormValidate} from "@/validate";
-import {FormInstance} from "@/instance";
-import { FormContext } from "@/context";
+import {FormContext} from "@/context";
+import {createFormContext} from "@/hooks";
+import {Provider} from "react-redux";
+import {formStore} from "@/store";
 
-export const FormView: React.FC<FormViewProps> = (props) => {
 
-    const Form = FormRegistry.getInstance().getFormComponent();
-    if (!Form) {
+interface FormViewContentProps extends FormViewProps {
+    Form: React.ComponentType<any>;
+}
+
+export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
+
+    const {Form} = props;
+
+    const context = createFormContext(props);
+    if (!context) {
         throw new Error('Form Component must register. ');
     }
 
-    const context = React.useMemo(() => {
-        const form = FormRegistry.getInstance().getFormInstance()?.();
-        if (!form) {
-            throw new Error('Form Instance must register.');
-        }
+    const instance = context.getInstance();
 
-        const instance = props.form ? props.form as FormInstance : new FormInstance(form);
-
-        return {
-            instance,
-            validate: new FormValidate(props.validators || [], instance),
-        }
-    }, [props.form]);
-
-
-    const formInstance = context.instance.getProxyTarget();
+    const formInstance = instance.getProxyTarget();
 
     const fields = props.meta.fields || [];
 
@@ -47,7 +42,7 @@ export const FormView: React.FC<FormViewProps> = (props) => {
                         readOnly: review
                     };
 
-                    const FormItem = FormFactory.getInstance().getItem(field.type);
+                    const FormItem = FormItemFactory.getInstance().getItem(field.type);
                     if (FormItem) {
                         return (
                             <FormItem {...formItemProps}/>
@@ -57,4 +52,20 @@ export const FormView: React.FC<FormViewProps> = (props) => {
             </Form>
         </FormContext.Provider>
     )
+}
+
+
+export const FormView: React.FC<FormViewProps> = (props) => {
+
+    const Form = FormRegistry.getInstance().getFormComponent();
+    if (!Form) {
+        throw new Error('Form Component must register. ');
+    }
+
+    return (
+        <Provider store={formStore}>
+            <FormViewContent {...props} Form={Form}/>
+        </Provider>
+    )
+
 }

@@ -1,7 +1,7 @@
 import React from "react";
 import {FormItemProps} from "@/types/item";
 
-export class FormFactory {
+export class FormItemFactory {
 
     private readonly cache: Map<string, React.ComponentType<FormItemProps>>;
 
@@ -9,7 +9,7 @@ export class FormFactory {
         this.cache = new Map();
     }
 
-    private static readonly instance = new FormFactory();
+    private static readonly instance = new FormItemFactory();
 
     public static getInstance() {
         return this.instance;

@@ -1,10 +1,10 @@
-import {useFormRegister} from "@coding-form/form-view";
+import {registerFormItems} from "@coding-form/form-view";
 import {FormString} from "@/components/string";
 import {Form} from "antd";
 
 export const registerForms = () => {
 
-    useFormRegister(Form,[
+    registerFormItems(Form,[
         {
             type: 'string',
             componentType:FormString

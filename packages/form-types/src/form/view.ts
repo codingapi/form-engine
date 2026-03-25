@@ -56,7 +56,7 @@ export interface FormMeta {
     // 表单字段
     fields: FormField[];
     // 子表单
-    subForms: FormMeta[];
+    subForms?: FormMeta[];
 }
 
 
@@ -64,6 +64,7 @@ export interface FormMeta {
  * 表单视图属性
  */
 export interface FormViewProps {
+    /** 表单定义 **/
     meta: FormMeta;
     /** 表单操控对象 */
     form?: FormInstance;

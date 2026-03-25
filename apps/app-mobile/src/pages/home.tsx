@@ -31,7 +31,7 @@ const HomePage = () => {
                 form={form}
                 validators={[
                     {
-                        code:'name',
+                        fieldCode:'name',
                         validator:(value,instance)=>{
                             if(value){
                                 return true;
@@ -66,15 +66,27 @@ const HomePage = () => {
 
                 <Button
                     onClick={() => {
-                        form.hiddenFields(['name']);
+                        form.hiddenFields(true,['name']);
                     }}
-                >hidden</Button>
+                >enable hidden</Button>
 
                 <Button
                     onClick={() => {
-                        form.showFields(['name']);
+                        form.hiddenFields(false,['name']);
                     }}
-                >show</Button>
+                >disable hidden</Button>
+
+                <Button
+                    onClick={() => {
+                        form.requiredFields(true,['name']);
+                    }}
+                >enable required</Button>
+
+                <Button
+                    onClick={() => {
+                        form.requiredFields(false,['name']);
+                    }}
+                >disable required</Button>
             </Space>
         </div>
     );

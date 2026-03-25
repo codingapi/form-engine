@@ -1,10 +1,18 @@
 import {FormInstance} from "@/form/instance";
 
 
+/**
+ * 字段校验器
+ */
 export interface FormFieldValidator {
 
-    code: string;
+    /** 表单名称 **/
+    formCode?: string;
 
-    validator:  ( value: any, instance: FormInstance) => string | true;
+    /** 字段名 **/
+    fieldCode: string;
+
+    /** 校验函数 **/
+    validator: (value: any, instance: FormInstance) => string | true;
 
 }

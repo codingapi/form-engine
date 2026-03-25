@@ -1,6 +1,6 @@
 import React from "react";
 import {FormRegistry} from "@/register";
-import {FormFactory} from "@/factory";
+import {FormItemFactory} from "@/factory";
 import {FormItemProps} from "@/types";
 
 interface FormItemType {
@@ -9,7 +9,8 @@ interface FormItemType {
 }
 
 
-export const useFormRegister = (Form: any, items: FormItemType[]) => {
+export const registerFormItems = (Form: any,
+                                  items: FormItemType[]) => {
 
     const ref = React.useRef<any>();
 
@@ -20,7 +21,7 @@ export const useFormRegister = (Form: any, items: FormItemType[]) => {
         });
 
         for (const item of items) {
-            FormFactory.getInstance().register(item.type, item.componentType);
+            FormItemFactory.getInstance().register(item.type, item.componentType);
         }
     }
 }

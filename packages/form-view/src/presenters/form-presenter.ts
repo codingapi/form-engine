@@ -1,10 +1,22 @@
-import {FormMeta} from "@coding-form/form-types";
+import {Dispatch, FormViewProps} from "@coding-form/form-types";
+import {FormState} from "@/types";
 
 export class FormPresenter {
-    private readonly meta: FormMeta;
+    private readonly props: FormViewProps;
+    private state: FormState;
+    private readonly dispatch: Dispatch<FormState>;
 
-    constructor(meta: FormMeta) {
-        this.meta = meta;
+    constructor(props: FormViewProps, state: FormState, dispatch: Dispatch<FormState>) {
+        this.props = props;
+        this.state = state;
+        this.dispatch = dispatch;
     }
 
+    public syncState(state: FormState) {
+        this.state = state;
+    }
+
+
+    public initialState() {
+    }
 }
