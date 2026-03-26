@@ -1,4 +1,5 @@
 import {FieldAttribute} from "@/types/view";
+import {DataType} from "@/types/types";
 
 /**
  *  表单组件属性
@@ -22,6 +23,12 @@ export interface FormItemProps{
     onBlur?: (value: string) => void;
     /** 输入提示信息 **/
     placeholder?:string;
+    /** 提醒提示 **/
+    tooltip?: string;
+    /** 帮助提示 **/
+    help?: string;
+    /** 数据类型 **/
+    dataType: DataType;
     /** 是否只读 **/
     readOnly?:boolean;
     /** 校验规则，Antd的规则 **/
