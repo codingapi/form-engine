@@ -259,6 +259,7 @@ pnpm build
 | meta       | FormMeta | 表单元数据定义  |
 | form       | FormInstance | 表单实例     |
 | onBlur     | (formCode?: string) => void | 表单失去焦点事件 |
+| onValuesChange   | (partial:any,values:any,formCode?:string)=>void | 表单值更新事件   |
 | onFinish   | (values: any, formCode?: string) => void | 表单提交回调   |
 | header     | React.ReactNode | 表单头部内容   |
 | footer     | React.ReactNode | 表单底部内容   |
