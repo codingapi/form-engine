@@ -1,3 +1,5 @@
+import { NamePath } from "@/types";
+
 export class FormControl {
 
     // 控制对象的表单编码
@@ -19,7 +21,7 @@ export class FormControl {
         return this.proxyTarget;
     }
 
-    public getFieldValue(name: string) {
+    public getFieldValue(name: NamePath) {
         return this.proxyTarget.getFieldValue(name);
     }
 
@@ -27,7 +29,7 @@ export class FormControl {
         return this.proxyTarget.getFieldsValue();
     }
 
-    public resetFields(nameList?: string[]) {
+    public resetFields(nameList?: NamePath[]|NamePath) {
         this.proxyTarget.resetFields(nameList);
     }
 
@@ -35,7 +37,7 @@ export class FormControl {
         this.proxyTarget.setFieldsValue(values);
     }
 
-    public setFieldValue(name: string, value: any) {
+    public setFieldValue(name: NamePath, value: any) {
         this.proxyTarget.setFieldValue(name, value);
     }
 
@@ -43,7 +45,7 @@ export class FormControl {
         this.proxyTarget.submit();
     }
 
-    public validateFields(nameList?: string[]) {
+    public validateFields(nameList?: NamePath[]|NamePath) {
         return new Promise<any>((resolve, reject) => {
             this.proxyTarget
                 .validateFields(nameList)

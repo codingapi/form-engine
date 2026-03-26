@@ -48,6 +48,9 @@ const HomePage = () => {
             <FormView
                 meta={meta}
                 form={form}
+                onFinish={(values, formCode)=>{
+                    console.log(values, formCode);
+                }}
                 validators={[
                     {
                         target:'name',

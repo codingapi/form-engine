@@ -1,3 +1,4 @@
+import React from "react";
 import {DataType} from "./types";
 import {FormInstance} from "@/instance";
 import {FormEvent, FormFieldValidator} from "@/types";
@@ -97,6 +98,12 @@ export interface FormViewProps {
     form?: FormInstance;
     /** 表单数据更新事件 */
     onValuesChange?: (values: any) => void;
+    /** 表单提交数据 **/
+    onFinish?: (values:any,formCode?:string) => void;
+    /** 表单头内容 **/
+    header?:React.ReactNode;
+    /** 表单底部内容 **/
+    footer?:React.ReactNode;
     /** 是否预览模式 */
     review?: boolean;
     /** 字段校验逻辑 */
@@ -104,5 +111,5 @@ export interface FormViewProps {
     /** 事件定义 **/
     events?: FormEvent[];
     /** 布局控制 **/
-    layouts?: FormLayout[]
+    layouts?: FormLayout[];
 }

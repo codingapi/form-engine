@@ -1,15 +1,15 @@
-import {FormMeta} from "@/types";
+import {FormInstanceInterface, FormMeta, NamePath} from "@/types";
 import {FormRegistry} from "@/register";
 import {FormControl} from "./control";
 import {FormPresenter} from "@/presenters";
 
-export class FormInstance {
+export class FormInstance implements FormInstanceInterface {
 
     private readonly instanceList: FormControl[];
 
     private readonly meta: FormMeta;
 
-    private presenter: FormPresenter|undefined;
+    private presenter: FormPresenter | undefined;
 
     constructor(meta: FormMeta) {
         this.meta = meta;
@@ -67,7 +67,7 @@ export class FormInstance {
         return this.getFormControl(formCode)?.getProxyTarget();
     }
 
-    public getFieldValue(name: string, formCode?: string) {
+    public getFieldValue(name: NamePath, formCode?: string) {
         this.getFormControl(formCode)?.getFieldValue(name);
     }
 
@@ -75,7 +75,7 @@ export class FormInstance {
         return this.getFormControl(formCode)?.getFieldsValue();
     }
 
-    public resetFields(nameList?: string[], formCode?: string) {
+    public resetFields(nameList?: NamePath[] | NamePath, formCode?: string) {
         this.getFormControl(formCode)?.resetFields(nameList);
     }
 
@@ -83,7 +83,7 @@ export class FormInstance {
         this.getFormControl(formCode)?.setFieldsValue(values);
     }
 
-    public setFieldValue(name: string, value: any, formCode?: string) {
+    public setFieldValue(name: NamePath, value: any, formCode?: string) {
         this.getFormControl(formCode)?.setFieldValue(name, value);
     }
 
@@ -91,7 +91,7 @@ export class FormInstance {
         this.getFormControl(formCode)?.submit();
     }
 
-    public validateFields(nameList?: string[], formCode?: string) {
+    public validateFields(nameList?: NamePath[] | NamePath, formCode?: string) {
         const formControl = this.getFormControl(formCode);
         if (formControl) {
             return formControl.validateFields(nameList);
@@ -103,15 +103,15 @@ export class FormInstance {
         });
     }
 
-    public hiddenFields(hidden: boolean, nameList: string[]|string, formCode?: string) {
+    public hiddenFields(hidden: boolean, nameList: NamePath[] | NamePath, formCode?: string) {
         this.presenter?.hiddenFields(hidden, nameList, formCode);
     }
 
-    public requiredFields(required: boolean, nameList: string[]|string, formCode?: string) {
+    public requiredFields(required: boolean, nameList: NamePath[] | NamePath, formCode?: string) {
         this.presenter?.requiredFields(required, nameList, formCode);
     }
 
-    public refreshFields(nameList: string[]|string, formCode?: string) {
+    public refreshFields(nameList: NamePath[] | NamePath, formCode?: string) {
         this.presenter?.refreshFields(nameList, formCode);
     }
 

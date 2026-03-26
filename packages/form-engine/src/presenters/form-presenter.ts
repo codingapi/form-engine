@@ -1,4 +1,4 @@
-import {Dispatch, FormMeta, FormState, StateField} from "@/types";
+import {Dispatch, FormMeta, FormState, NamePath, StateField} from "@/types";
 
 export class FormPresenter {
     private state: FormState;
@@ -19,7 +19,7 @@ export class FormPresenter {
     }
 
 
-    public hiddenFields(hidden: boolean, nameList: string[]|string, formCode?: string) {
+    public hiddenFields(hidden: boolean, nameList: NamePath[]|NamePath, formCode?: string) {
         this.dispatch(prevState => {
             const subFormList = prevState.subForms || [];
             return {
@@ -52,7 +52,7 @@ export class FormPresenter {
     }
 
 
-    public refreshFields(nameList: string[]|string, formCode?: string){
+    public refreshFields(nameList: NamePath[]|NamePath, formCode?: string){
         this.dispatch(prevState => {
             const subFormList = prevState.subForms || [];
             return {
@@ -84,7 +84,7 @@ export class FormPresenter {
         })
     }
 
-    public requiredFields(required: boolean, nameList: string[]|string, formCode?: string) {
+    public requiredFields(required: boolean, nameList: NamePath[]|NamePath, formCode?: string) {
         this.dispatch(prevState => {
             const subFormList = prevState.subForms || [];
             return {
@@ -117,7 +117,7 @@ export class FormPresenter {
     }
 
 
-    private hiddenMapFields(hidden: boolean,field:StateField,nameList: string[]|string) {
+    private hiddenMapFields(hidden: boolean,field:StateField,nameList: NamePath[]|NamePath) {
         if(typeof nameList === 'string'){
             if(field.code ===nameList){
                 return {
@@ -137,7 +137,7 @@ export class FormPresenter {
     }
 
 
-    private refreshMapFields(field:StateField,nameList: string[]|string) {
+    private refreshMapFields(field:StateField,nameList: NamePath[]|NamePath) {
         if(typeof nameList === 'string'){
             if(field.code ===nameList){
                 const version = field.version?field.version:0;
@@ -158,7 +158,7 @@ export class FormPresenter {
         return field;
     }
 
-    private requiredMapFields(required: boolean,field:StateField,nameList: string[]|string) {
+    private requiredMapFields(required: boolean,field:StateField,nameList: NamePath[]|NamePath) {
         if(typeof nameList === 'string'){
             if(field.code ===nameList){
                 return {

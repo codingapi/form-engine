@@ -6,3 +6,4 @@ export * from "./validate";
 export * from "./event";
 export * from "./dispatch";
 export * from "./layout";
+export * from "./instance";
