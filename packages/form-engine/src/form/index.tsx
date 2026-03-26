@@ -28,8 +28,12 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
 
     const review = props.review || false;
 
-    const handleOnSubmit = (values:any,formCode:string) => {
+    const handleOnFinish = (values:any,formCode:string) => {
         props.onFinish?.(values,formCode);
+    }
+
+    const handleOnBlur = (formCode:string) => {
+        props.onBlur?.(formCode);
     }
 
     return (
@@ -39,7 +43,9 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                 Form={Form}
                 formCode={meta.code}
                 review={review}
-                onFinish={handleOnSubmit}
+                onFinish={handleOnFinish}
+                onBlur={handleOnBlur}
+                children={props.children}
             />
             {subFormList && subFormList.map(item=>{
                 return (
@@ -47,7 +53,8 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                         Form={Form}
                         formCode={item.code}
                         review={review}
-                        onFinish={handleOnSubmit}
+                        onFinish={handleOnFinish}
+                        onBlur={handleOnBlur}
                     />
                 )
             })}

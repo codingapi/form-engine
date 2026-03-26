@@ -96,14 +96,16 @@ export interface FormViewProps {
     meta: FormMeta;
     /** 表单操控对象 */
     form?: FormInstance;
-    /** 表单数据更新事件 */
-    onValuesChange?: (values: any) => void;
     /** 表单提交数据 **/
     onFinish?: (values:any,formCode?:string) => void;
-    /** 表单头内容 **/
+    /** 表单失去焦点事件 **/
+    onBlur?: (formCode?:string) => void;
+    /** 表单头内容（表单外部） **/
     header?:React.ReactNode;
-    /** 表单底部内容 **/
+    /** 表单底部内容（表单外部） **/
     footer?:React.ReactNode;
+    /** 主表单自定义内容（表单内部） **/
+    children?:React.ReactNode;
     /** 是否预览模式 */
     review?: boolean;
     /** 字段校验逻辑 */

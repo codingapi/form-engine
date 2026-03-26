@@ -92,13 +92,15 @@ interface CardLayout {
 
 ```typescript
 interface FormViewProps {
-    header?: React.ReactNode;  // 表单头部内容
-    footer?: React.ReactNode;  // 表单底部内容
+    header?: React.ReactNode;  // 表单头部内容（表单外部）
+    footer?: React.ReactNode;  // 表单底部内容（表单外部）
+    children?:React.ReactNode; // 主表单自定义内容（表单内部）
 }
 ```
 
-- `header`: 渲染在表单内容上方的区域，可用于放置标题、说明文字等
-- `footer`: 渲染在表单内容下方的区域，可用于放置提交按钮、操作栏等
+- `header`: 渲染在表单外部内容上方的区域，可用于放置标题、说明文字等
+- `footer`: 渲染在表单外部内容下方的区域，可用于放置提交按钮、操作栏等
+- `children`: 渲染在主表单内部的区域，可用于放置固定的隐藏字段或者其他的界面内容
 
 ### 6. 表单提交（onFinish）
 
@@ -252,18 +254,18 @@ pnpm build
 
 ### FormView 组件属性
 
-| 属性 | 类型 | 说明 |
-|------|------|------|
-| meta | FormMeta | 表单元数据定义 |
-| form | FormInstance | 表单实例 |
-| onValuesChange | (values: any) => void | 值变化回调 |
-| onFinish | (values: any, formCode?: string) => void | 表单提交回调 |
-| header | React.ReactNode | 表单头部内容 |
-| footer | React.ReactNode | 表单底部内容 |
-| review | boolean | 是否预览模式 |
-| validators | FormFieldValidator[] | 验证规则数组 |
-| events | FormEvent[] | 事件定义数组 |
-| layouts | FormLayout[] | 布局定义数组 |
+| 属性         | 类型 | 说明       |
+|------------|------|----------|
+| meta       | FormMeta | 表单元数据定义  |
+| form       | FormInstance | 表单实例     |
+| onBlur     | (formCode?: string) => void | 表单失去焦点事件 |
+| onFinish   | (values: any, formCode?: string) => void | 表单提交回调   |
+| header     | React.ReactNode | 表单头部内容   |
+| footer     | React.ReactNode | 表单底部内容   |
+| review     | boolean | 是否预览模式   |
+| validators | FormFieldValidator[] | 验证规则数组   |
+| events     | FormEvent[] | 事件定义数组   |
+| layouts    | FormLayout[] | 布局定义数组   |
 
 ### 数据类型
 

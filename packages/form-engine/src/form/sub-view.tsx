@@ -6,6 +6,8 @@ interface FormSubViewProps {
     Form: React.ComponentType<any>;
     review: boolean;
     onFinish: (values:any,formCode:string) => void;
+    onBlur: (formCode:string) => void;
+    children?:React.ReactNode;
 }
 
 export const FormSubView: React.FC<FormSubViewProps> = (props) => {
@@ -51,10 +53,14 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
     return (
         <Form
             form={formTarget}
+            onBlur={()=>{
+                props.onBlur(props.formCode);
+            }}
             onFinish={(values:any)=>{
                 props.onFinish(values,props.formCode);
             }}
         >
+            {props.children}
             {layoutContext.render(props.formCode, fields, review, context)}
         </Form>
     )
