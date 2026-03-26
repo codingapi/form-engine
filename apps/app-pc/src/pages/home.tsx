@@ -129,6 +129,13 @@ const HomePage = () => {
 
                 <Button
                     onClick={() => {
+                        const values = form.getFieldValue('name');
+                        console.log(values);
+                    }}
+                >getValue</Button>
+
+                <Button
+                    onClick={() => {
                         const values = form.getFieldsValue();
                         console.log(values);
                     }}

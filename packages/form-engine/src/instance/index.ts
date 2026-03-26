@@ -68,7 +68,7 @@ export class FormInstance implements FormInstanceInterface {
     }
 
     public getFieldValue(name: NamePath, formCode?: string) {
-        this.getFormControl(formCode)?.getFieldValue(name);
+        return this.getFormControl(formCode)?.getFieldValue(name);
     }
 
     public getFieldsValue(formCode?: string) {

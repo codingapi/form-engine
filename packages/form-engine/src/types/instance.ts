@@ -9,7 +9,7 @@ export interface FormInstanceInterface {
     /** 获取表所有值 **/
     getFieldsValue: (formCode?: string) => any;
     /** 重置表单值 **/
-    resetFields: (fields?: NamePath[] | NamePath, formCode?: string) => void;
+    resetFields: (fields?: NamePath[], formCode?: string) => void;
     /** 设置表单所有值 **/
     setFieldsValue: (values: any, formCode?: string) => void;
     /** 设置表单值 **/
