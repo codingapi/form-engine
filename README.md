@@ -86,7 +86,35 @@ interface CardLayout {
 }
 ```
 
-### 5. 刷新组件
+### 5. Header 和 Footer
+
+支持在表单头部和底部渲染自定义内容：
+
+```typescript
+interface FormViewProps {
+    header?: React.ReactNode;  // 表单头部内容
+    footer?: React.ReactNode;  // 表单底部内容
+}
+```
+
+- `header`: 渲染在表单内容上方的区域，可用于放置标题、说明文字等
+- `footer`: 渲染在表单内容下方的区域，可用于放置提交按钮、操作栏等
+
+### 6. 表单提交（onFinish）
+
+支持表单提交事件处理：
+
+```typescript
+interface FormViewProps {
+    onFinish?: (values: any, formCode?: string) => void;
+}
+```
+
+- 当表单提交时触发
+- 返回表单数据和表单编码
+- 支持主表单和子表单
+
+### 7. 刷新组件
 
 通过增加字段 `version` 版本号来触发组件的重新渲染：
 
@@ -112,7 +140,7 @@ form.refreshFields(['field1', 'field2']);
 form.refreshFields(['field1'], 'sub_form_code');
 ```
 
-### 6. 表单实例控制
+### 8. 表单实例控制
 
 提供丰富的表单操作方法：
 
@@ -174,7 +202,23 @@ const meta = {
     ]
 };
 
+// 基础用法
 <FormView meta={meta} />;
+
+// 带 header、footer 和 onFinish 的完整用法
+<FormView
+    meta={meta}
+    header={<div className="form-header">用户信息登记表</div>}
+    footer={
+        <div className="form-footer">
+            <Button type="primary" htmlType="submit">提交</Button>
+            <Button>取消</Button>
+        </div>
+    }
+    onFinish={(values, formCode) => {
+        console.log('表单提交数据:', values, '表单编码:', formCode);
+    }}
+/>;
 ```
 
 ### 4. 开发模式
@@ -213,6 +257,9 @@ pnpm build
 | meta | FormMeta | 表单元数据定义 |
 | form | FormInstance | 表单实例 |
 | onValuesChange | (values: any) => void | 值变化回调 |
+| onFinish | (values: any, formCode?: string) => void | 表单提交回调 |
+| header | React.ReactNode | 表单头部内容 |
+| footer | React.ReactNode | 表单底部内容 |
 | review | boolean | 是否预览模式 |
 | validators | FormFieldValidator[] | 验证规则数组 |
 | events | FormEvent[] | 事件定义数组 |
