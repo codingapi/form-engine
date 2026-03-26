@@ -85,7 +85,33 @@ interface CardLayout {
 }
 ```
 
-### 5. 表单实例控制
+### 5. 刷新组件
+
+通过增加字段 `version` 版本号来触发组件的重新渲染：
+
+```typescript
+interface StateField {
+    version?: number;  // 版本号，每次刷新时递增
+}
+```
+
+- `refreshFields`: 刷新指定字段，触发组件重新渲染
+- 支持单个字段或字段数组
+- 支持主表单和子表单
+- 通过递增 `version` 值实现强制刷新
+
+```typescript
+// 刷新单个字段
+form.refreshFields('field_code');
+
+// 刷新多个字段
+form.refreshFields(['field1', 'field2']);
+
+// 刷转子表单字段
+form.refreshFields(['field1'], 'sub_form_code');
+```
+
+### 6. 表单实例控制
 
 提供丰富的表单操作方法：
 
@@ -104,6 +130,7 @@ submit(formCode?: string)
 // 动态控制
 hiddenFields(hidden: boolean, nameList: string[]|string, formCode?: string)
 requiredFields(required: boolean, nameList: string[]|string, formCode?: string)
+refreshFields(nameList: string[]|string, formCode?: string)  // 刷新字段，触发重新渲染
 ```
 
 ## 快速开始
