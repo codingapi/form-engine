@@ -98,6 +98,8 @@ export interface FormViewProps {
     form?: FormInstance;
     /** 布局方向 **/
     layout?:'horizontal' | 'vertical';
+    /** 表单值更新事件 **/
+    onValuesChange?:(partial:any,values:any,formCode?:string)=>void;
     /** 表单提交数据 **/
     onFinish?: (values:any,formCode?:string) => void;
     /** 表单失去焦点事件 **/

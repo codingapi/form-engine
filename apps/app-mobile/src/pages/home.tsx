@@ -1,7 +1,6 @@
-import {createFormInstance, FormView} from "@coding-form/form-engine";
 import type {FormMeta} from "@coding-form/form-engine";
+import {createFormInstance, FormInstance, FormView} from "@coding-form/form-engine";
 import {Button, Space} from "antd-mobile";
-import {FormInstance} from "@coding-form/form-engine";
 
 const HomePage = () => {
 
@@ -30,11 +29,14 @@ const HomePage = () => {
             <FormView
                 meta={meta}
                 form={form}
+                onValuesChange={(partial, values, formCode) => {
+                    console.log(partial, values, formCode);
+                }}
                 validators={[
                     {
-                        target:'name',
-                        validator:(_instance:FormInstance,value:any)=>{
-                            if(value){
+                        target: 'name',
+                        validator: (_instance: FormInstance, value: any) => {
+                            if (value) {
                                 return true;
                             }
                             return '你可真行'
@@ -67,25 +69,25 @@ const HomePage = () => {
 
                 <Button
                     onClick={() => {
-                        form.hiddenFields(true,['name']);
+                        form.hiddenFields(true, ['name']);
                     }}
                 >enable hidden</Button>
 
                 <Button
                     onClick={() => {
-                        form.hiddenFields(false,['name']);
+                        form.hiddenFields(false, ['name']);
                     }}
                 >disable hidden</Button>
 
                 <Button
                     onClick={() => {
-                        form.requiredFields(true,['name']);
+                        form.requiredFields(true, ['name']);
                     }}
                 >enable required</Button>
 
                 <Button
                     onClick={() => {
-                        form.requiredFields(false,['name']);
+                        form.requiredFields(false, ['name']);
                     }}
                 >disable required</Button>
             </Space>

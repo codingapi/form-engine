@@ -51,6 +51,9 @@ const HomePage = () => {
                 onFinish={(values, formCode)=>{
                     console.log(values, formCode);
                 }}
+                onValuesChange={(partial, values, formCode) => {
+                    console.log(partial, values, formCode);
+                }}
                 validators={[
                     {
                         target:'name',

@@ -36,6 +36,10 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
         props.onBlur?.(formCode);
     }
 
+    const handleOnValuesChange = (partial:any,values:any,formCode:string) => {
+        props.onValuesChange?.(partial,values,formCode);
+    }
+
     return (
         <FormContext.Provider value={context}>
             {props.header}
@@ -47,6 +51,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                 onBlur={handleOnBlur}
                 children={props.children}
                 layout={props.layout}
+                onValuesChange={handleOnValuesChange}
             />
             {subFormList && subFormList.map(item=>{
                 return (
@@ -57,6 +62,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                         onFinish={handleOnFinish}
                         onBlur={handleOnBlur}
                         layout={props.layout}
+                        onValuesChange={handleOnValuesChange}
                     />
                 )
             })}
