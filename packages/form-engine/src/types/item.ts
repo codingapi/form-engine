@@ -1,3 +1,5 @@
+import {FieldAttribute} from "@/types/view";
+
 /**
  *  表单组件属性
  */
@@ -28,4 +30,6 @@ export interface FormItemProps{
     layout?:'horizontal' | 'vertical';
     /** 刷新版本号 **/
     version?:number;
+    /** 附加属性 **/
+    attributes?: FieldAttribute[];
 }
