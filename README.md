@@ -7,7 +7,7 @@
 ```
 coding-form/
 ├── packages/
-│   └── form-view/          # 核心表单视图库
+│   └── form-engine/          # 核心表单视图库
 │       ├── src/
 │       │   ├── form/       # 表单组件
 │       │   ├── factory/    # 表单项工厂
@@ -144,7 +144,7 @@ pnpm install
 ### 2. 注册表单组件
 
 ```tsx
-import { FormRegistry } from '@coding-form/form-view';
+import { FormRegistry } from '@coding-form/form-engine';
 import YourFormComponent from './YourFormComponent';
 import formInstanceFactory from './formInstanceFactory';
 
@@ -154,7 +154,7 @@ FormRegistry.getInstance().register(YourFormComponent, formInstanceFactory);
 ### 3. 使用表单视图
 
 ```tsx
-import { FormView } from '@coding-form/form-view';
+import { FormView } from '@coding-form/form-engine';
 
 const meta = {
     name: '用户信息',

@@ -1,6 +1,6 @@
 import {Form, Input} from "antd-mobile";
 import React from "react";
-import {type FormItemProps} from "@coding-form/form-view";
+import {type FormItemProps} from "@coding-form/form-engine";
 
 export const FormString: React.FC<FormItemProps> = (props) => {
 

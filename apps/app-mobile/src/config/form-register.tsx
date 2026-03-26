@@ -1,4 +1,4 @@
-import {registerFormItems} from "@coding-form/form-view";
+import {registerFormItems} from "@coding-form/form-engine";
 import {FormString} from "@/components/string";
 import {Form} from "antd-mobile";
 

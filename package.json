@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build:form-view": "pnpm -F @coding-form/form-view build",
-    "build": "pnpm run build:form-view",
-    "watch:form-view": "pnpm -F @coding-form/form-view dev",
+    "build:form-engine": "pnpm -F @coding-form/form-engine build",
+    "build": "pnpm run build:form-engine",
+    "watch:form-engine": "pnpm -F @coding-form/form-engine dev",
     "dev:app-pc": "pnpm -F @form-example/app-pc dev",
     "dev:app-mobile": "pnpm -F @form-example/app-mobile dev",
     "clean": "pnpm cleaninstall-node"
