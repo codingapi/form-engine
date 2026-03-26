@@ -8,6 +8,7 @@ interface FormSubViewProps {
     onFinish: (values:any,formCode:string) => void;
     onBlur: (formCode:string) => void;
     children?:React.ReactNode;
+    layout?:'horizontal' | 'vertical';
 }
 
 export const FormSubView: React.FC<FormSubViewProps> = (props) => {
@@ -53,6 +54,7 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
     return (
         <Form
             form={formTarget}
+            layout={props.layout}
             onBlur={()=>{
                 props.onBlur(props.formCode);
             }}

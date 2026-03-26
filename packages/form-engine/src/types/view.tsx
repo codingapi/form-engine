@@ -96,6 +96,8 @@ export interface FormViewProps {
     meta: FormMeta;
     /** 表单操控对象 */
     form?: FormInstance;
+    /** 布局方向 **/
+    layout?:'horizontal' | 'vertical';
     /** 表单提交数据 **/
     onFinish?: (values:any,formCode?:string) => void;
     /** 表单失去焦点事件 **/

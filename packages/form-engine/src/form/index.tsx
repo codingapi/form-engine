@@ -46,6 +46,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                 onFinish={handleOnFinish}
                 onBlur={handleOnBlur}
                 children={props.children}
+                layout={props.layout}
             />
             {subFormList && subFormList.map(item=>{
                 return (
@@ -55,6 +56,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                         review={review}
                         onFinish={handleOnFinish}
                         onBlur={handleOnBlur}
+                        layout={props.layout}
                     />
                 )
             })}
