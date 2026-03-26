@@ -27,15 +27,3 @@ export const dataTypeOptions = [
         value: 'BOOLEAN'
     },
 ]
-
-/**
- * 表单类型
- */
-export interface FormType {
-    // 类型名称
-    name: string;
-    // 类型定义
-    type: string;
-    // 数据类型
-    dataType: DataType;
-}
