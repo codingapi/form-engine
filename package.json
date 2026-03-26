@@ -1,7 +1,7 @@
 {
   "name": "@coding-form/root",
   "version": "0.0.8",
-  "description": "",
+  "description": "form-engine",
   "main": "index.js",
   "scripts": {
     "build:form-engine": "pnpm -F @coding-form/form-engine build",
