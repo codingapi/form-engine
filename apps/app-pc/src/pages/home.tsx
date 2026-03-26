@@ -2,6 +2,7 @@ import {createFormInstance, FormView} from "@coding-form/form-view";
 import type {FormMeta} from "@coding-form/form-view";
 import {Button, Space} from "antd";
 import {FormInstance} from "@coding-form/form-view";
+import type {CardLayout} from "@/layout/card-form-layout.tsx";
 
 const HomePage = () => {
 
@@ -26,6 +27,15 @@ const HomePage = () => {
                 dataType: 'STRING',
                 hidden: false,
                 required: true,
+            },
+            {
+                id: "name2",
+                name: '姓名2',
+                code: 'name2',
+                type: "string",
+                dataType: 'STRING',
+                hidden: false,
+                required: true,
             }
         ],
         subForms: []
@@ -41,7 +51,7 @@ const HomePage = () => {
                 validators={[
                     {
                         target:'name',
-                        validator:(instance:FormInstance,value:any)=>{
+                        validator:(_instance:FormInstance,value:any)=>{
                             if(value){
                                 return true;
                             }
@@ -69,11 +79,34 @@ const HomePage = () => {
                             mainFields:[],
                             fields:[
                                 {
+                                    code:'id',
+                                    span:0
+                                },
+                                {
                                     code:'name',
-                                    span:12
+                                    span:24
                                 }
                             ]
                         }
+                    },
+                    {
+                        formCode:'leave',
+                        type:'card',
+                        props:{
+                            title:'测试',
+                            layout:'vertical',
+                            mainFields:[],
+                            fields:[
+                                {
+                                    code:'name2',
+                                    span:12
+                                },
+                                {
+                                    code:'name2',
+                                    span:12
+                                }
+                            ]
+                        } as CardLayout
                     }
                 ]}
             />
@@ -84,6 +117,12 @@ const HomePage = () => {
                         form.submit();
                     }}
                 >submit</Button>
+
+                <Button
+                    onClick={() => {
+                        form.refreshFields('name');
+                    }}
+                >refresh</Button>
 
                 <Button
                     onClick={() => {

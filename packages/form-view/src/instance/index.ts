@@ -3,7 +3,6 @@ import {FormRegistry} from "@/register";
 import {FormControl} from "./control";
 import {FormPresenter} from "@/presenters";
 
-
 export class FormInstance {
 
     private readonly instanceList: FormControl[];
@@ -110,6 +109,10 @@ export class FormInstance {
 
     public requiredFields(required: boolean, nameList: string[]|string, formCode?: string) {
         this.presenter?.requiredFields(required, nameList, formCode);
+    }
+
+    public refreshFields(nameList: string[]|string, formCode?: string) {
+        this.presenter?.refreshFields(nameList, formCode);
     }
 
 }

@@ -1,4 +1,4 @@
-import {Dispatch, FormField, FormMeta, FormState} from "@/types";
+import {Dispatch, FormMeta, FormState, StateField} from "@/types";
 
 export class FormPresenter {
     private state: FormState;
@@ -51,6 +51,39 @@ export class FormPresenter {
         })
     }
 
+
+    public refreshFields(nameList: string[]|string, formCode?: string){
+        this.dispatch(prevState => {
+            const subFormList = prevState.subForms || [];
+            return {
+                ...prevState,
+                fields:prevState.fields.map(item=>{
+                    if(formCode){
+                        if(formCode===prevState.code){
+                            return this.refreshMapFields(item,nameList);
+                        }
+                    }else {
+                        return this.refreshMapFields(item,nameList);
+                    }
+                    return item;
+                }),
+                subForms:subFormList.map(item=>{
+                    if(formCode){
+                        if(formCode===item.code){
+                            return {
+                                ...item,
+                                fields:item.fields.map(item=>{
+                                    return this.refreshMapFields(item,nameList);
+                                })
+                            }
+                        }
+                    }
+                    return item;
+                })
+            }
+        })
+    }
+
     public requiredFields(required: boolean, nameList: string[]|string, formCode?: string) {
         this.dispatch(prevState => {
             const subFormList = prevState.subForms || [];
@@ -84,7 +117,7 @@ export class FormPresenter {
     }
 
 
-    private hiddenMapFields(hidden: boolean,field:FormField,nameList: string[]|string) {
+    private hiddenMapFields(hidden: boolean,field:StateField,nameList: string[]|string) {
         if(typeof nameList === 'string'){
             if(field.code ===nameList){
                 return {
@@ -103,7 +136,29 @@ export class FormPresenter {
         return field;
     }
 
-    private requiredMapFields(required: boolean,field:FormField,nameList: string[]|string) {
+
+    private refreshMapFields(field:StateField,nameList: string[]|string) {
+        if(typeof nameList === 'string'){
+            if(field.code ===nameList){
+                const version = field.version?field.version:0;
+                return {
+                    ...field,
+                    version:version+1
+                }
+            }
+        }else {
+            if(nameList.includes(field.code)){
+                const version = field.version?field.version:0;
+                return {
+                    ...field,
+                    version:version+1
+                }
+            }
+        }
+        return field;
+    }
+
+    private requiredMapFields(required: boolean,field:StateField,nameList: string[]|string) {
         if(typeof nameList === 'string'){
             if(field.code ===nameList){
                 return {

@@ -33,7 +33,7 @@ const HomePage = () => {
                 validators={[
                     {
                         target:'name',
-                        validator:(instance:FormInstance,value:any)=>{
+                        validator:(_instance:FormInstance,value:any)=>{
                             if(value){
                                 return true;
                             }

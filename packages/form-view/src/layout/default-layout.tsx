@@ -2,7 +2,9 @@ import React from "react";
 import {FormLayoutProps} from "@/types";
 import {FormItemFactory} from "@/factory";
 
-export const DefaultLayout: React.FC<FormLayoutProps> = (props) => {
+type DefaultLayoutProps  = Omit<FormLayoutProps, 'layout'>;
+
+export const DefaultLayout: React.FC<DefaultLayoutProps> = (props) => {
 
     const fields = props.fields;
     const formCode = props.formCode;

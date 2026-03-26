@@ -1,7 +1,7 @@
 import React from "react";
 import {FormLayoutProps} from "@/types";
 
-export class LayoutFactory {
+export class LayoutRegister {
     
     private readonly map:Map<string,React.ComponentType<FormLayoutProps>>;
     
@@ -9,7 +9,7 @@ export class LayoutFactory {
         this.map = new Map<string, React.ComponentType<FormLayoutProps>>();
     }
     
-    private static readonly instance: LayoutFactory = new LayoutFactory();
+    private static readonly instance: LayoutRegister = new LayoutRegister();
     
     public static getInstance(){
         return this.instance;

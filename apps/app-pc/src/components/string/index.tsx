@@ -4,6 +4,12 @@ import {type FormItemProps} from "@coding-form/form-view";
 
 export const FormString: React.FC<FormItemProps> = (props) => {
 
+    React.useEffect(()=>{
+        if(props.version){
+            console.log('refresh .... ');
+        }
+    },[props.version]);
+
     return (
         <Form.Item
             name={props.name}

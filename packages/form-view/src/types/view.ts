@@ -69,35 +69,16 @@ export interface FieldCode {
     fieldCode: string;
 }
 
-/** 字段排版 **/
-export interface FieldLayout {
-    /** 字段名称 **/
-    code: string;
-    /** 大小排版 **/
-    span: number;
-}
-
-/**
- * 卡片布局
- */
-export interface CardLayout {
-    /** 布局标题 **/
-    title: string;
-    /** 布局方向 **/
-    layout: 'horizontal' | 'vertical';
-    /** 展示字段 **/
-    fields: FieldLayout[];
-    /** 主要字段 **/
-    mainFields: string[];
-}
-
 /**
  *  表单布局
  */
 export interface FormLayout {
+    /** 所属表单 **/
     formCode: string;
-    type: 'card',
-    props:CardLayout
+    /** 布局类型 **/
+    type: string,
+    /** 表单属性 **/
+    props:any
 }
 
 

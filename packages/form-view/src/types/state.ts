@@ -1,8 +1,10 @@
 import {FormField} from "@/types/view";
 
+export type StateField = FormField & {version?:number};
+
 export interface FormState {
     code: string;
-    fields: FormField[];
+    fields: StateField[];
     subForms?: FormState[];
 }
 

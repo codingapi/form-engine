@@ -1,9 +1,39 @@
 import React from "react";
-import type {FieldLayout, FormLayoutProps} from "@coding-form/form-view";
+import {type FormLayoutProps,type FormLayout} from "@coding-form/form-view";
 import {FormItemFactory} from "@coding-form/form-view";
 import {Col, Row} from "antd";
 
-export const CardFormLayout:React.FC<FormLayoutProps> = (props: FormLayoutProps) => {
+
+/** 字段排版 **/
+export interface FieldLayout {
+    /** 字段名称 **/
+    code: string;
+    /** 大小排版 **/
+    span: number;
+}
+
+/**
+ * 卡片布局
+ */
+export interface CardLayout {
+    /** 布局标题 **/
+    title: string;
+    /** 布局方向 **/
+    layout: 'horizontal' | 'vertical';
+    /** 展示字段 **/
+    fields: FieldLayout[];
+    /** 主要字段 **/
+    mainFields: string[];
+}
+
+
+type CardFormLayoutProps = Omit<FormLayoutProps, 'layout'> & {
+    layout: Omit<FormLayout, 'props'> & {
+        props: CardLayout;
+    };
+};
+
+export const CardFormLayout:React.FC<CardFormLayoutProps> = (props: CardFormLayoutProps) => {
 
     const layout = props.layout;
     const review = props.review;
@@ -40,7 +70,7 @@ export const CardFormLayout:React.FC<FormLayoutProps> = (props: FormLayoutProps)
                 {layout.props.title}
             </Col>
 
-            {fieldLayouts.map(item=>{
+            {fieldLayouts.map((item)=>{
                 return fieldRender(item);
             })}
 

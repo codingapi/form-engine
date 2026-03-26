@@ -1,9 +1,8 @@
 import {FormField, FormLayout} from "@/types";
 import React from "react";
 import {FormContextScope} from "@/context";
-import {LayoutFactory} from "@/layout/factory";
+import {LayoutRegister} from "@/register/layout";
 import {DefaultLayout} from "@/layout/default-layout";
-export * from "./factory";
 
 export class LayoutContext {
 
@@ -13,37 +12,44 @@ export class LayoutContext {
         this.layouts = layouts;
     }
 
-    public getLayout(formCode:string){
+    public getLayouts(formCode:string){
+        const layouts = [];
         for(const layout of this.layouts){
             if(layout.formCode === formCode){
-                return layout;
+                layouts.push(layout);
             }
         }
-        return undefined;
+        return layouts;
     }
 
 
     public render(formCode:string,fields:FormField[],review:boolean,context:FormContextScope){
-        const layout = this.getLayout(formCode);
+        const layouts = this.getLayouts(formCode);
 
-        if(layout) {
-            const LayoutComponent = LayoutFactory.getInstance().getLayoutComponent(layout.type);
-            if (LayoutComponent) {
-                return (
-                    <LayoutComponent
-                        layout={layout}
-                        fields={fields}
-                        review={review}
-                        context={context}
-                        formCode={formCode}
-                    />
-                )
-            }
+        if(layouts && layouts.length > 0) {
+            return (
+                <>
+                    {layouts.map((layout:FormLayout) => {
+                        const LayoutComponent = LayoutRegister.getInstance().getLayoutComponent(layout.type);
+                        console.log('LayoutComponent', layout);
+                        if (LayoutComponent) {
+                            return (
+                                <LayoutComponent
+                                    layout={layout}
+                                    fields={fields}
+                                    review={review}
+                                    context={context}
+                                    formCode={formCode}
+                                />
+                            )
+                        }
+                    })}
+                </>
+            )
         }
 
         return (
             <DefaultLayout
-                layout={layout as any}
                 fields={fields}
                 review={review}
                 context={context}
