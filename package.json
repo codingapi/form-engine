@@ -7,6 +7,8 @@
     "build:form-engine": "pnpm -F @coding-form/form-engine build",
     "build": "pnpm run build:form-engine",
     "watch:form-engine": "pnpm -F @coding-form/form-engine dev",
+    "push:form-engine": "pnpm -F @coding-form/form-engine push",
+    "push": "pnpm run push:form-engine",
     "dev:app-pc": "pnpm -F @form-example/app-pc dev",
     "dev:app-mobile": "pnpm -F @form-example/app-mobile dev",
     "clean": "pnpm cleaninstall-node"
