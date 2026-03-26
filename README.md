@@ -1,3 +1,4 @@
+[![npm](https://img.shields.io/npm/v/@coding-form/form-engine.svg)](https://www.npmjs.com/package/@coding-form/form-engine)
 # Form Engine
 
 一个基于 React 的动态表单引擎，支持表单动态渲染、字段验证、事件处理和布局控制。
