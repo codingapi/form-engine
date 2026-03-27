@@ -11,12 +11,17 @@ interface FormItemType {
 
 export const registerFormItems = (Form: any,
                                   items: FormItemType[]) => {
-    FormRegistry.getInstance().register(Form, () => {
-        const [form] = Form.useForm();
-        return form;
-    });
 
-    for (const item of items) {
-        FormItemFactory.getInstance().register(item.type, item.componentType);
+    const ref = React.useRef<any>();
+
+    if (!ref.current) {
+        FormRegistry.getInstance().register(Form, () => {
+            const [form] = Form.useForm();
+            return form;
+        });
+
+        for (const item of items) {
+            FormItemFactory.getInstance().register(item.type, item.componentType);
+        }
     }
 }
