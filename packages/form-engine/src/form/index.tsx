@@ -45,6 +45,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
             {props.header}
             <FormSubView
                 Form={Form}
+                form={props.form}
                 formCode={meta.code}
                 review={review}
                 onFinish={handleOnFinish}
@@ -57,6 +58,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
                 return (
                     <FormSubView
                         Form={Form}
+                        form={props.form}
                         formCode={item.code}
                         review={review}
                         onFinish={handleOnFinish}

@@ -1,7 +1,9 @@
 import React from "react";
 import {useFormContext} from "@/hooks";
+import {FormInstance} from "@/instance";
 
 interface FormSubViewProps {
+    form?: FormInstance;
     formCode: string;
     Form: React.ComponentType<any>;
     review: boolean;
@@ -50,7 +52,11 @@ export const FormSubView: React.FC<FormSubViewProps> = (props) => {
         }
     }, []);
 
-
+    React.useEffect(()=>{
+        if(props.form){
+            props.form.setPresenter(context.getPresenter());
+        }
+    },[props.form]);
 
     return (
         <Form
