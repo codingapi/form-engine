@@ -31,7 +31,6 @@ export class LayoutContext {
                 <>
                     {layouts.map((layout:FormLayout) => {
                         const LayoutComponent = LayoutRegister.getInstance().getLayoutComponent(layout.type);
-                        console.log('LayoutComponent', layout);
                         if (LayoutComponent) {
                             return (
                                 <LayoutComponent
