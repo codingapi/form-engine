@@ -44,6 +44,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
         <FormContext.Provider value={context}>
             {props.header}
             <FormSubView
+                className={props.className}
                 Form={Form}
                 form={props.form}
                 formCode={meta.code}
@@ -57,6 +58,7 @@ export const FormViewContent: React.FC<FormViewContentProps> = (props) => {
             {subFormList && subFormList.map(item=>{
                 return (
                     <FormSubView
+                        className={props.className}
                         Form={Form}
                         form={props.form}
                         formCode={item.code}

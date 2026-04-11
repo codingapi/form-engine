@@ -118,4 +118,6 @@ export interface FormViewProps {
     events?: FormEvent[];
     /** 布局控制 **/
     layouts?: FormLayout[];
+    /** 样式控制 **/
+    className?: string;
 }

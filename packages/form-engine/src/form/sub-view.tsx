@@ -12,6 +12,7 @@ interface FormSubViewProps {
     onBlur?: (formCode:string) => void;
     children?:React.ReactNode;
     layout?:'horizontal' | 'vertical';
+    className?: string;
 }
 
 export const FormSubView: React.FC<FormSubViewProps> = (props) => {
