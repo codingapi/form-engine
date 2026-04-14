@@ -4,6 +4,7 @@ export * from "./types";
 export * from "./view";
 export * from "./validate";
 export * from "./event";
+export * from "./trigger";
 export * from "./dispatch";
 export * from "./layout";
 export * from "./instance";

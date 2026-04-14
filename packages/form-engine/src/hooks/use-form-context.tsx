@@ -8,6 +8,7 @@ import {FormInstance} from "@/instance";
 import {FormValidate} from "@/validate";
 import {EventContext} from "@/event";
 import {LayoutContext} from "@/layout";
+import {TriggerContext} from "@/trigger";
 
 export const useFormContext = () => {
     const value = React.useContext(FormContext);
@@ -46,7 +47,10 @@ export const createFormContext = (props: FormViewProps) => {
         const layoutContext = new LayoutContext(props.layouts || []);
 
         const eventContext = new EventContext(props.events || []);
-        ref.current = new FormContextScope(props, instance, validate, eventContext, layoutContext, presenter);
+
+        const triggerContext = new TriggerContext(props.triggers || []);
+
+        ref.current = new FormContextScope(props, instance, validate, eventContext, triggerContext, layoutContext, presenter);
         ref.current.initialState();
     }
 

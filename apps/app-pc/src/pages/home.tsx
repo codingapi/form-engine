@@ -1,7 +1,6 @@
-import {createFormInstance, FormView} from "@coding-form/form-engine";
 import type {FormMeta} from "@coding-form/form-engine";
+import {createFormInstance, FormInstance, FormView} from "@coding-form/form-engine";
 import {Button, Space} from "antd";
-import {FormInstance} from "@coding-form/form-engine";
 import type {CardLayout} from "@/layout/card-form-layout.tsx";
 
 const HomePage = () => {
@@ -48,7 +47,7 @@ const HomePage = () => {
             <FormView
                 meta={meta}
                 form={form}
-                onFinish={(values, formCode)=>{
+                onFinish={(values, formCode) => {
                     console.log(values, formCode);
                 }}
                 onValuesChange={(partial, values, formCode) => {
@@ -56,60 +55,74 @@ const HomePage = () => {
                 }}
                 validators={[
                     {
-                        target:'name',
-                        validator:(_instance:FormInstance,value:any)=>{
-                            if(value){
+                        target: 'name',
+                        validator: (_instance: FormInstance, value: any) => {
+                            if (value) {
                                 return true;
                             }
                             return '你可真行'
                         }
                     }
                 ]}
+                triggers={[
+                    {
+                        type: 'refresh',
+                        target: 'name',
+                        trigger: (_instance: FormInstance) => {
+                            return new Promise((resolve) => {
+                                resolve({
+                                    name: _instance.getFieldValue('name')
+                                });
+                            });
+                        }
+                    }
+                ]}
                 events={[
                     {
                         type: 'change',
-                        target:'name',
-                        event:(instance:FormInstance,value:any)=>{
-                            console.log('value',value);
-                            instance.setFieldValue('id',value);
+                        target: 'name',
+                        event: (instance: FormInstance, value: any) => {
+                            console.log('value', value);
+                            instance.setFieldValue('id', value);
+                            instance.refreshFields('name');
                         }
                     }
                 ]}
                 layouts={[
                     {
-                        formCode:'leave',
-                        type:'card',
-                        props:{
-                            title:'测试',
-                            layout:'vertical',
-                            mainFields:[],
-                            fields:[
+                        formCode: 'leave',
+                        type: 'card',
+                        props: {
+                            title: '测试',
+                            layout: 'vertical',
+                            mainFields: [],
+                            fields: [
                                 {
-                                    code:'id',
-                                    span:0
+                                    code: 'id',
+                                    span: 0
                                 },
                                 {
-                                    code:'name',
-                                    span:24
+                                    code: 'name',
+                                    span: 24
                                 }
                             ]
                         }
                     },
                     {
-                        formCode:'leave',
-                        type:'card',
-                        props:{
-                            title:'测试',
-                            layout:'vertical',
-                            mainFields:[],
-                            fields:[
+                        formCode: 'leave',
+                        type: 'card',
+                        props: {
+                            title: '测试',
+                            layout: 'vertical',
+                            mainFields: [],
+                            fields: [
                                 {
-                                    code:'name2',
-                                    span:12
+                                    code: 'name2',
+                                    span: 12
                                 },
                                 {
-                                    code:'name2',
-                                    span:12
+                                    code: 'name2',
+                                    span: 12
                                 }
                             ]
                         } as CardLayout
@@ -161,25 +174,25 @@ const HomePage = () => {
 
                 <Button
                     onClick={() => {
-                        form.hiddenFields(true,['name']);
+                        form.hiddenFields(true, ['name']);
                     }}
                 >enable hidden</Button>
 
                 <Button
                     onClick={() => {
-                        form.hiddenFields(false,['name']);
+                        form.hiddenFields(false, ['name']);
                     }}
                 >disable hidden</Button>
 
                 <Button
                     onClick={() => {
-                        form.requiredFields(true,['name']);
+                        form.requiredFields(true, ['name']);
                     }}
                 >enable required</Button>
 
                 <Button
                     onClick={() => {
-                        form.requiredFields(false,['name']);
+                        form.requiredFields(false, ['name']);
                     }}
                 >disable required</Button>
             </Space>

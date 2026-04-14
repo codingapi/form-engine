@@ -1,14 +1,31 @@
 import {Form, Input} from "antd";
 import React from "react";
-import {type FormItemProps} from "@coding-form/form-engine";
+import {type FormItemProps, useFormContext} from "@coding-form/form-engine";
 
 export const FormString: React.FC<FormItemProps> = (props) => {
 
-    React.useEffect(()=>{
-        if(props.version){
-            console.log('refresh .... ');
+    const {context} = useFormContext();
+
+    const instance = context.getFormInstance();
+
+    const triggerContext = context.getTriggerContext();
+
+    React.useEffect(() => {
+        if (props.version) {
+            console.log('refresh .... ',props.version);
+            triggerContext.trigger('refresh', instance, props.name)
+                .then(list => {
+                    let data:any = {} ;
+                    for (const item of list) {
+                        data = {
+                            ...data,
+                            ...item
+                        }
+                    }
+                    console.log(data);
+                });
         }
-    },[props.version]);
+    }, [props.version]);
 
     return (
         <Form.Item
@@ -22,10 +39,10 @@ export const FormString: React.FC<FormItemProps> = (props) => {
         >
             <Input
                 placeholder={props.placeholder}
-                onChange={(event)=>{
+                onChange={(event) => {
                     props.onChange?.(event.target.value);
                 }}
-                onBlur={(event)=>{
+                onBlur={(event) => {
                     props.onBlur?.(event.target.value);
                 }}
             />

@@ -1,7 +1,7 @@
 import React from "react";
 import {DataType} from "./types";
 import {FormInstance} from "@/instance";
-import {FormEvent, FormFieldValidator} from "@/types";
+import {FormEvent, FormFieldValidator, FormTrigger} from "@/types";
 
 /**
  *  附加属性
@@ -116,6 +116,8 @@ export interface FormViewProps {
     validators?: FormFieldValidator[];
     /** 事件定义 **/
     events?: FormEvent[];
+    /** 触发动作 **/
+    triggers?: FormTrigger[];
     /** 布局控制 **/
     layouts?: FormLayout[];
     /** 样式控制 **/

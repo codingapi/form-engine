@@ -5,6 +5,7 @@ import {FormState, FormViewProps} from "@/types";
 import {EventContext} from "@/event";
 import {FormInstance} from "@/instance";
 import {LayoutContext} from "@/layout";
+import {TriggerContext} from "@/trigger";
 
 
 export class FormContextScope {
@@ -14,18 +15,21 @@ export class FormContextScope {
     private readonly validate: FormValidate;
     private readonly presenter: FormPresenter;
     private readonly eventContext: EventContext;
+    private readonly triggerContext: TriggerContext;
     private readonly layoutContext: LayoutContext;
 
     constructor(props:FormViewProps,
                 instance: FormInstance,
                 validate: FormValidate,
                 eventContext: EventContext,
+                triggerContext: TriggerContext,
                 layoutContext: LayoutContext,
                 presenter: FormPresenter) {
         this.props = props;
         this.instance = instance;
         this.presenter = presenter;
         this.eventContext = eventContext;
+        this.triggerContext = triggerContext;
         this.validate = validate;
         this.layoutContext = layoutContext;
         this.instance.setPresenter(presenter);
@@ -57,6 +61,10 @@ export class FormContextScope {
 
     public getEventContext() {
         return this.eventContext;
+    }
+
+    public getTriggerContext() {
+        return this.triggerContext;
     }
 
     public getValidate() {
