@@ -9,21 +9,21 @@ export class EventContext {
         this.events = events;
     }
 
-    public handlerOnChange(formInstance:FormInstance,target: FieldKey, value: any) {
+    public handlerOnChange(formInstance: FormInstance, target: FieldKey, value: any, option: any) {
         const events = this.getEvents('change', target);
         if (events && events.length > 0) {
             for (const event of events) {
-                event.event(formInstance,value);
+                event.event(formInstance, value, option);
             }
         }
     }
 
 
-    public handlerOnBlur(formInstance:FormInstance,target: FieldKey,value:any) {
+    public handlerOnBlur(formInstance: FormInstance, target: FieldKey, value: any) {
         const events = this.getEvents('blur', target);
         if (events && events.length > 0) {
             for (const event of events) {
-                event.event(formInstance,value);
+                event.event(formInstance, value);
             }
         }
     }

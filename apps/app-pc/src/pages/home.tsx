@@ -35,7 +35,32 @@ const HomePage = () => {
                 dataType: 'STRING',
                 hidden: false,
                 required: true,
-            }
+            },
+            {
+                id: "option",
+                name: 'option',
+                code: 'option',
+                type: "select",
+                dataType: 'STRING',
+                hidden: false,
+                required: true,
+                attributes: [
+                    {
+                        key: '123',
+                        label: 'DataSource',
+                        value: [
+                            {
+                                label: '1',
+                                value: '1'
+                            },
+                            {
+                                label: '2',
+                                value: '2'
+                            }
+                        ]
+                    }
+                ]
+            },
         ],
         subForms: []
     }
@@ -86,6 +111,13 @@ const HomePage = () => {
                             instance.setFieldValue('id', value);
                             instance.refreshFields('name');
                         }
+                    },
+                    {
+                        type: 'change',
+                        target: 'option',
+                        event: (_: FormInstance, value: any, option) => {
+                            console.log('value', value, option);
+                        }
                     }
                 ]}
                 layouts={[
@@ -103,6 +135,10 @@ const HomePage = () => {
                                 },
                                 {
                                     code: 'name',
+                                    span: 24
+                                },
+                                {
+                                    code: 'option',
                                     span: 24
                                 }
                             ]

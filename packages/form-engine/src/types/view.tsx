@@ -12,7 +12,7 @@ export interface FieldAttribute {
     // 属性名称
     label?: string;
     // 属性值
-    value?: string;
+    value?: any;
 }
 
 /**

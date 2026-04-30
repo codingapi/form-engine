@@ -13,7 +13,7 @@ export interface FormEvent {
     target?:FieldKey;
 
     // 事件触发
-    event:(instance:FormInstance,value?:any)=>void;
+    event:(instance:FormInstance,value?:any,option?:any)=>void;
 
 }
 

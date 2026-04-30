@@ -18,7 +18,7 @@ export interface FormItemProps{
     /** 当前值 **/
     value?: string;
     /** 变更事件 **/
-    onChange?: (value: string) => void;
+    onChange?: (value: string,option?:any) => void;
     /** 失去焦点事件 **/
     onBlur?: (value: string) => void;
     /** 输入提示信息 **/

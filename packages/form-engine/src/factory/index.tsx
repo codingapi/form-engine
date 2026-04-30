@@ -17,7 +17,7 @@ export class FormItemFactory {
         return this.instance;
     }
 
-    public register(type: string,componentType:React.ComponentType<FormItemProps>) {
+    public register(type: string, componentType: React.ComponentType<FormItemProps>) {
         this.cache.set(type, componentType);
     }
 
@@ -27,17 +27,17 @@ export class FormItemFactory {
     }
 
 
-    public render(formCode:string,
-                  formField:FormField,
-                  layout:'horizontal' | 'vertical',
-                  readOnly:boolean,
-                  context:FormContextScope){
+    public render(formCode: string,
+                  formField: FormField,
+                  layout: 'horizontal' | 'vertical',
+                  readOnly: boolean,
+                  context: FormContextScope) {
 
         const formItemProps: FormItemProps = {
             ...formField,
             readOnly: readOnly,
-            name:formField.code,
-            label:formField.name
+            name: formField.code,
+            label: formField.name
         };
 
         const FormItem = FormItemFactory.getInstance().getItem(formField.type);
@@ -48,17 +48,17 @@ export class FormItemFactory {
 
         const fieldKey = {
             formCode,
-            fieldCode:formField.code,
+            fieldCode: formField.code,
         }
 
-        const handlerOnChange = (value:any)=>{
+        const handlerOnChange = (value: any, option: any) => {
             formItemProps.onChange?.(value);
-            eventContext.handlerOnChange(instance,fieldKey, value);
+            eventContext.handlerOnChange(instance, fieldKey, value, option);
         }
 
-        const handlerOnBlur = (value:any) => {
+        const handlerOnBlur = (value: any) => {
             formItemProps.onBlur?.(value);
-            eventContext.handlerOnBlur(instance,fieldKey,value);
+            eventContext.handlerOnBlur(instance, fieldKey, value);
         }
 
         if (FormItem) {
